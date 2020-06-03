@@ -1,4 +1,4 @@
-import useFetch from '../../utils/useFetch'
+import useFetch from './useFetch'
 
 //const URL = "https://graphql.fauna.com/graphql"
 //const SECRET = "fnADsoMFXtACFEzdTAzM2wDMSHVcXC3xjNy8_Hbp"

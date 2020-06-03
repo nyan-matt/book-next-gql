@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
-import { allBooks } from './api/api'
+import { allBooks } from '../utils/api'
 import { Container, Spinner, Grid, Box, Heading, AspectImage, Label } from 'theme-ui'
 import Hero from '../components/Hero'
 

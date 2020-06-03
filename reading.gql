@@ -1,0 +1,51 @@
+type Books @colletion(name: "books") {
+    title: String!
+    subTitle: String
+    releaseDate: String
+    coverArt: String
+    rating: Int
+    authors: [Author!]
+    comments: String
+    featured: Boolean
+    tags: [Tag]
+    isbn: String
+    pageCount: Int
+}
+type Tags @collection(name: "tags") {
+    tagName: String!
+}
+
+type Author @embedded {
+    name: String!
+}
+
+type Tag @embedded {
+    name: String!
+}
+
+input AddAuthorToBook {
+    name: String
+}
+
+input AddTagToBook {
+    name: String
+}
+
+input AddBookInput {
+    title: String!
+    subTitle: String
+    releaseDate: String
+    coverArt: String
+    rating: Int
+    authors: [AddAuthorToBook]!
+    comments: String
+    featured: Boolean
+    isbn: String
+    pageCount: Int
+    tags: [AddTagToBook]
+}
+
+type Query {
+    allBooks: [Books!]! @index(name: "all_books")
+    allTags: [Tags!]! @index(name: "all_tags")
+}

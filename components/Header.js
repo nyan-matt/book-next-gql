@@ -1,5 +1,6 @@
+/** @jsx jsx */
 import React from 'react'
-import { useColorMode, Flex, Box } from 'theme-ui'
+import { useColorMode, Flex, Box, jsx } from 'theme-ui'
 import Link from 'next/link'
 
 const ColorButton = ({ mode, ...props }) => (
@@ -46,7 +47,9 @@ export default (props) => {
     <header>
       <Flex>
         <Box p={2} sx={{ flex: '1 1 auto' }}>
-          <Link href="/"><a>Books</a></Link>
+          <Link href="/">
+              <a sx={{ variant: "links.nav" }}>Books</a>
+            </Link>
         </Box>
         <Box p={2}>
           <ColorButton

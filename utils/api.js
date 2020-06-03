@@ -1,7 +1,5 @@
 import useFetch from './useFetch'
 
-//const URL = "https://graphql.fauna.com/graphql"
-//const SECRET = "fnADsoMFXtACFEzdTAzM2wDMSHVcXC3xjNy8_Hbp"
 const URL = process.env.URL
 const SECRET = process.env.SECRET
 

@@ -3,9 +3,6 @@ import useFetch from './useFetch'
 const URL = process.env.URL
 const SECRET = process.env.SECRET
 
-console.log(URL, SECRET)
-console.log(process.env.URL)
-
 function getData(data) {
   if (!data || data.errors) return null
   return data.data

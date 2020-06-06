@@ -1,10 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
-import { request } from 'graphql-request'
 import fetcher from '../../utils/fetcher'
 import { useState, useEffect } from 'react'
-import { bookById } from '../../utils/api'
 import { Container, Spinner, Grid, Box, Heading, AspectImage } from 'theme-ui'
 
 export async function getStaticPaths() {

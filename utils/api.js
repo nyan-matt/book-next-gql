@@ -57,6 +57,44 @@ export const allBooks = (limit) => {
   }
 }
 
+// get book by id
+export const bookById = (id) => {
+  const query = `query bookById($id:ID!) {
+    findBooksByID(id: $id) {
+      _id
+      title
+      subTitle
+      rating
+      coverArt
+      authors {
+        name
+      }
+      tags {
+        name
+      }
+    }
+  }`
+  const { data, error } = useFetch(URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${SECRET}`,
+      'Content-type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify({
+      query,
+      variables: { id },
+    }),
+  })
+
+  return {
+    data: getData(data),
+    errorMessage: getErrorMessage(error, data),
+    error,
+  }
+}
+
+
 // create a book mutation
 export const createBooks = async (book) => {
   const query = `mutation createBooks($data:BooksInput!) {

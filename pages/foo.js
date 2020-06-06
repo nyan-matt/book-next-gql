@@ -10,6 +10,7 @@ export default function Add(props) {
   const [subTitle, setSubTitle] = useState('')
   const [authors, setAuthors] = useState([{ name: '' }])
   const [alert, setAlert] = useState({show: false, message: 'message'})
+  const [coverArt, setCoverArt] = useState('')
   const [loading, setLoading] = useState(false)
   const [bookTitles, setBookTitles] = useState({})
   const GBAPI = 'https://www.googleapis.com/books/v1/volumes?printType=books&maxResults=5&printType=books&'
@@ -49,6 +50,7 @@ export default function Add(props) {
     const book = {
       title: title,
       subTitle: subTitle,
+      coverArt: coverArt,
       authors: authors
     }
     setLoading(true)
@@ -190,6 +192,14 @@ export default function Add(props) {
                     </Flex>
                   )
                 })}
+                <Label htmlFor="coverArt">Cover Art</Label>
+                  <Input
+                    name="coverArt"
+                    placeholder="https://example.com/bookcover.jpg"
+                    mb={3}
+                    value={coverArt}
+                    onChange={(e) => setCoverArt(e.target.value)}
+                  />
                 <Button foo="bar" onSubmit={handleSubmit} disabled={!title || !authors[0].name}>Submit</Button>  
               </Box>
             )

@@ -1,7 +1,10 @@
+/** @jsx jsx */
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { allBooks } from '../utils/api'
-import { Container, Spinner, Grid, Box, Heading, AspectImage, Label } from 'theme-ui'
+import Link from 'next/link'
+import { Container, Spinner, Grid, Box, Heading, AspectImage, Divider, Badge, jsx } from 'theme-ui'
+import StarRatingComponent from 'react-star-rating-component'
 import Hero from '../components/Hero'
 
 function getBooks(data) {
@@ -32,32 +35,47 @@ export default function Home(props) {
     <Container sx={{padding: [16, 32]}}>
       <main>
         <Hero />
+        <Divider />
         <Heading>Recent Reads</Heading>
         <Heading as="h3" sx={{fontSize:1, fontWeight: 400}}>Recently finished</Heading>
         <button onClick={handleResetFilter}>Reset Filter</button>
-        <Grid columns={[1, 2, 3]} sx={{mt:32}}>
+        <Grid columns={[1, 2, 3, 4]} sx={{mt:32}}>
           {errorMessage ? (
             <p>{errorMessage}</p>
           ) : !data ? (
-            <Spinner title="Loading Books" />
+            <Box>
+              <Spinner
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)'
+                }} 
+              />
+            </Box>
           ) : (
             books.map((book, index) => {
               return (
-                <Box key={book._id}>
-                  <AspectImage ratio={2/1} src={book.coverArt} alt={`Cover art - ${book.title}`}/>
-                  <Heading>{book.title}</Heading>
-                  <Heading as="h3" sx={{fontSize:1, fontWeight: 400}}>{book.subTitle}</Heading>
-                  <p>Rating: {book.rating}</p>
+                <Box key={book._id} sx={{margin:'16px', padding: '16px'}}>
+                  <AspectImage sx={{borderRadius: '4px', border: '1px solid', borderColor: 'muted'}} ratio={1/1} src={book.coverArt ? book.coverArt : '/no-image.png'} alt={`Cover art - ${book.title}`}/>
+                  <Heading sx={{fontSize: '18px', marginTop: '12px'}}><Link href={`/book/${book._id}`}><a sx={{variant: 'links.cards'}}>{book.title}</a></Link></Heading>
+                  <div>
                   {book.authors.map((author, index) => (
-                    <span key={index}>{author.name}{' '}</span>
+                    <span key={index}>{author.name}{book.authors.length > 1 && index < book.authors.length - 1 ? ', ' : ' ' }</span>
                   ))}
+                  </div>
+                  { book.rating && 
+                    <StarRatingComponent name={book._id} starCount={5} value={book.rating} editing={false} />
+                  }
+                  <div>
                   {book.tags.map((tag, index) => (
-                    <button key={index} onClick={
+                    <Badge key={index} variant="primary" mr={2} onClick={
                       () => handleFilterByTag(tag.name)
                       }>
                       {tag.name}
-                    </button>
+                    </Badge>
                   ))}
+                  </div>
                 </Box>
               )
             })

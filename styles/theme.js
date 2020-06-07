@@ -3,7 +3,7 @@ export default {
   colors: {
     text: '#000000',
     background: '#ffffff',
-    primary: '#3333ee',
+    primary: '#62A0A5',
     secondary: '#111199',
     muted: '#f6f6f6',
     highlight: '#efeffe', // '#ffffcc',
@@ -83,6 +83,11 @@ export default {
     },
   },
   links: {
+    cards: {
+      color: 'primary',
+      fontWeight: '600',
+      cursor: 'pointer',
+    },
     button: {
       display: 'inline-block',
       textDecoration: 'none',
@@ -111,13 +116,7 @@ export default {
       transitionTimingFunction: 'ease-out',
       transitionDuration: '.2s',
       borderRadius: 2,
-      '&:hover': {
-        bg: 'highlight',
-      },
-      '&.active': {
-        color: 'primary',
-        bg: 'highlight',
-      },
+      cursor: 'pointer',
     },
   },
   badges: {

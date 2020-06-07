@@ -57,8 +57,16 @@ export default function Home(props) {
             books.map((book, index) => {
               return (
                 <Box key={book._id} sx={{margin:'16px', padding: '16px'}}>
-                  <AspectImage sx={{borderRadius: '4px', border: '1px solid', borderColor: 'muted'}} ratio={1/1} src={book.coverArt ? book.coverArt : '/no-image.png'} alt={`Cover art - ${book.title}`}/>
-                  <Heading sx={{fontSize: '18px', marginTop: '12px'}}><Link href={`/book/${book._id}`}><a sx={{variant: 'links.cards'}}>{book.title}</a></Link></Heading>
+                  <Link href={`/book/${book._id}`}>
+                    <AspectImage sx={{borderRadius: '4px', border: '1px solid', borderColor: 'muted', cursor: 'pointer'}} ratio={1/1} src={book.coverArt ? book.coverArt : '/no-image.png'} alt={`Cover art - ${book.title}`}/>
+                  </Link>
+                  <Heading sx={{fontSize: '18px', marginTop: '12px'}}>
+                    <Link href={`/book/${book._id}`}>
+                      <a sx={{variant: 'links.cards'}}>
+                        {book.title}
+                      </a>
+                    </Link>
+                  </Heading>
                   <div>
                   {book.authors.map((author, index) => (
                     <span key={index}>{author.name}{book.authors.length > 1 && index < book.authors.length - 1 ? ', ' : ' ' }</span>
@@ -69,7 +77,7 @@ export default function Home(props) {
                   }
                   <div>
                   {book.tags.map((tag, index) => (
-                    <Badge key={index} variant="primary" mr={2} onClick={
+                    <Badge key={index} variant="primary" mr={2} px={2} sx={{cursor: 'pointer'}}onClick={
                       () => handleFilterByTag(tag.name)
                       }>
                       {tag.name}

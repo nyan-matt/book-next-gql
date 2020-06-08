@@ -57,11 +57,11 @@ export default function Home(props) {
             books.map((book, index) => {
               return (
                 <Box key={book._id} sx={{margin:'16px', padding: '16px'}}>
-                  <Link href={`/book/${book._id}`}>
+                  <Link href="/book/[id]" as={`/book/${book._id}`}>
                     <AspectImage sx={{borderRadius: '4px', border: '1px solid', borderColor: 'muted', cursor: 'pointer'}} ratio={1/1} src={book.coverArt ? book.coverArt : '/no-image.png'} alt={`Cover art - ${book.title}`}/>
                   </Link>
                   <Heading sx={{fontSize: '18px', marginTop: '12px'}}>
-                    <Link href={`/book/${book._id}`}>
+                    <Link href="/book/[id]" as={`/book/${book._id}`}>
                       <a sx={{variant: 'links.cards'}}>
                         {book.title}
                       </a>

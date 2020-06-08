@@ -16,7 +16,7 @@ const Button = ({ children, ...props }) => {
         px: 3,
         py: 2,
         color: "white",
-        bg: "secondary",
+        bg: "primary",
         border: 0,
         borderRadius: 4,
         ":disabled": {

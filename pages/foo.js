@@ -44,9 +44,11 @@ export default function Add(props) {
       );
       const data = await res.json();
       let authorArray = [];
-      data.items.map((item) => {
-        authorArray.push(item.volumeInfo.authors);
-      });
+      if(data.totalItems > 0) {
+        data.items.map((item) => {
+          authorArray.push(item.volumeInfo.authors);
+        });
+      }
       let count = authorArray.reduce(
         (acc, value) => ({
           ...acc,

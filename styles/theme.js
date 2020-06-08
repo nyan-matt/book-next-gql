@@ -1,3 +1,5 @@
+import { FaBorderNone } from "react-icons/fa";
+
 export default {
   useColorSchemeMediaQuery: true,
   colors: {
@@ -72,6 +74,15 @@ export default {
       variant: 'buttons.primary',
       color: 'background',
       bg: 'secondary',
+    },
+    small: {
+      px: '12px',
+      py: '8px',
+      fontSize: '12px',
+      bg: 'background',
+      border: '1px solid',
+      borderColor: 'primary',
+      color: 'primary',
     },
     black: {
       fontWeight: 'bold',

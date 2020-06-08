@@ -5,6 +5,7 @@ import { allBooks } from "../utils/api";
 import Link from "next/link";
 import {
   Container,
+  Button,
   Spinner,
   Grid,
   Box,
@@ -24,6 +25,7 @@ function getBooks(data) {
 export default function Home(props) {
   const { data, errorMessage } = allBooks();
   const [books, setBooks] = useState([]);
+  const [filters, setFilters] = useState([])
 
   useEffect(() => {
     if (!books.length) {
@@ -32,12 +34,18 @@ export default function Home(props) {
   }, [data, books.length]);
 
   const handleFilterByTag = (tag) => {
+    let tempFilters = [...filters];
+    tempFilters.push(tag);
+    const dedup = new Set(tempFilters);
+    tempFilters = [...dedup];
+    setFilters(tempFilters);
     let filteredBooks = books.filter((b) => b.tags.some((t) => t.name === tag));
     setBooks(filteredBooks);
   };
 
   const handleResetFilter = () => {
     setBooks(getBooks(data));
+    setFilters([])
   };
 
   return (
@@ -45,11 +53,27 @@ export default function Home(props) {
       <main>
         <Hero />
         <Divider />
-        <Heading>Recent Reads</Heading>
-        <Heading as="h3" sx={{ fontSize: 1, fontWeight: 400 }}>
-          Recently finished
-        </Heading>
-        <button onClick={handleResetFilter}>Reset Filter</button>
+        <Heading mb={2}>Recent Reads</Heading>
+        
+        {
+          filters.length > 0 &&
+          <Button variant="buttons.small" mr={2} onClick={() => handleResetFilter()}>Reset Filter</Button>
+        }
+        {
+          filters.length > 0 &&
+          filters.map((filter, index) => {
+            return (
+              <Badge
+                key={index}
+                variant="primary"
+                mr={2}
+                px={2}
+              >
+                {filter}
+              </Badge>
+            )
+          })
+        }
         <Grid columns={[1, 2, 3, 4]} sx={{ mt: 32 }}>
           {errorMessage ? (
             <p>{errorMessage}</p>

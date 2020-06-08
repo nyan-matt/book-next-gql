@@ -94,7 +94,7 @@ function Book({ data }) {
           >
             <Box
               sx={{
-                flexBasis: ["100%", "50%", "40%"],
+                flexBasis: ["100%", "40%", "30%", ""],
               }}
             >
               <AspectImage
@@ -111,7 +111,7 @@ function Book({ data }) {
             </Box>
             <Box
               sx={{
-                flexBasis: ["100%", "50%", "60%"],
+                flexBasis: ["100%", "60%", "70%"],
                 paddingLeft: ["0px", "8px", "12px"],
               }}
             >

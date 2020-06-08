@@ -1,19 +1,19 @@
-import useFetch from './useFetch'
+import useFetch from "./useFetch";
 
-const URL = process.env.URL
-const SECRET = process.env.SECRET
+const URL = process.env.URL;
+const SECRET = process.env.SECRET;
 
 function getData(data) {
-  if (!data || data.errors) return null
-  return data.data
+  if (!data || data.errors) return null;
+  return data.data;
 }
 
 function getErrorMessage(errors, data) {
-  if (errors && errors.length) return errors[0].message 
+  if (errors && errors.length) return errors[0].message;
   if (data && data.errors) {
-    return data.errors[0].message
+    return data.errors[0].message;
   }
-  return null
+  return null;
 }
 
 // get all books query
@@ -35,27 +35,27 @@ export const allBooks = (limit) => {
       }
       after
     }
-  }`
-  const size = limit || 100
+  }`;
+  const size = limit || 100;
   const { data, error } = useFetch(URL, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: `Bearer ${SECRET}`,
-      'Content-type': 'application/json',
-      Accept: 'application/json',
+      "Content-type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({
       query,
       variables: { size },
     }),
-  })
+  });
 
   return {
     data: getData(data),
     errorMessage: getErrorMessage(error, data),
     error,
-  }
-}
+  };
+};
 
 // get book by id
 export const bookById = (id) => {
@@ -73,27 +73,26 @@ export const bookById = (id) => {
         name
       }
     }
-  }`
+  }`;
   const { data, error } = useFetch(URL, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: `Bearer ${SECRET}`,
-      'Content-type': 'application/json',
-      Accept: 'application/json',
+      "Content-type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({
       query,
       variables: { id },
     }),
-  })
+  });
 
   return {
     data: getData(data),
     errorMessage: getErrorMessage(error, data),
     error,
-  }
-}
-
+  };
+};
 
 // create a book mutation
 export const createBooks = async (book) => {
@@ -106,24 +105,24 @@ export const createBooks = async (book) => {
         name
       }
     }
-  }`
+  }`;
   const res = await fetch(URL, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: `Bearer ${SECRET}`,
-      'Content-type': 'application/json',
-      Accept: 'application/json',
+      "Content-type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({
       query,
       variables: { data: book },
     }),
-  })
-  const { data, errors } = await res.json()
-  
+  });
+  const { data, errors } = await res.json();
+
   return {
     data: data,
     errorMessage: getErrorMessage(errors, data),
     errors,
-  }
-}
+  };
+};

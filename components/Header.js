@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import React from 'react'
-import { useColorMode, Flex, Box, jsx } from 'theme-ui'
-import Link from 'next/link'
+import React from "react";
+import { useColorMode, Flex, Box, jsx } from "theme-ui";
+import Link from "next/link";
 
 const ColorButton = ({ mode, ...props }) => (
   <Box
@@ -9,20 +9,20 @@ const ColorButton = ({ mode, ...props }) => (
     {...props}
     title="Invert colors"
     sx={{
-      display: 'inline-block',
-      appearance: 'none',
-      bg: 'transparent',
-      color: 'inherit',
+      display: "inline-block",
+      appearance: "none",
+      bg: "transparent",
+      color: "inherit",
       p: 1,
       m: 0,
       border: 0,
       borderRadius: 9999,
       lineHeight: 0,
-      ':hover, :focus': {
-        color: 'primary',
-        boxShadow: '0',
-        outline: 'none'
-      }
+      ":hover, :focus": {
+        color: "primary",
+        boxShadow: "0",
+        outline: "none",
+      },
     }}
   >
     <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
@@ -36,28 +36,27 @@ const ColorButton = ({ mode, ...props }) => (
       />
       <path d="M 16 0 A 16 16 0 0 0 16 32 z" />
     </svg>
-  </Box> 
-)
-
-
+  </Box>
+);
 
 export default (props) => {
   const [colorMode, setColorMode] = useColorMode();
   return (
     <header>
       <Flex>
-        <Box p={2} sx={{ flex: '1 1 auto' }}>
+        <Box p={2} sx={{ flex: "1 1 auto" }}>
           <Link href="/">
-              <a sx={{ variant: "links.nav" }}>Books</a>
-            </Link>
+            <a sx={{ variant: "links.nav" }}>Books</a>
+          </Link>
         </Box>
         <Box p={2}>
           <ColorButton
             onClick={(e) => {
               setColorMode(colorMode === "default" ? "dark" : "default");
-            }}/>
+            }}
+          />
         </Box>
       </Flex>
     </header>
-  )
-}
+  );
+};

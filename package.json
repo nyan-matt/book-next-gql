@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "framer-motion": "^1.11.0",
     "graphql-request": "^1.8.2",
     "next": "9.4.2",
     "react": "16.13.1",

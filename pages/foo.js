@@ -25,18 +25,8 @@ export default function Add(props) {
   const GBAPI =
     "https://www.googleapis.com/books/v1/volumes?printType=books&maxResults=5&printType=books&";
 
-  // useEffect(() => {
-  //   async function fetchBooks() {
-  //     const res = await fetch(GBAPI + new URLSearchParams({q:title}))
-  //     const data = await res.json()
-  //     //console.log(data)
-  //     setBookTitles(data)
-  //   }
-  //   if (title.length > 3) {
-  //     fetchBooks()
-  //   }
-  // }, [title])
-
+  /*  Fetch title results from Google's book api, and if there seems to be an author match, pre-populate it in the author field. Unfortunately, GBAPI doesn't always return the most relevant results. Sometimes it works... e.g. "Frankstein" returns "Mary Wollstonecraft Shelley"
+*/
   const handleLookAhead = () => {
     async function fetchAuthorsFromTitle() {
       const res = await fetch(

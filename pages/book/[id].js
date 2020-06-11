@@ -6,13 +6,13 @@ import {
   Container,
   Spinner,
   Flex,
-  Grid,
   Box,
   Heading,
   AspectImage,
   Badge,
 } from "theme-ui";
 import StarRatingComponent from "react-star-rating-component";
+import { motion } from "framer-motion";
 
 export async function getStaticPaths() {
   const query = `query allBooks($size: Int) {
@@ -83,9 +83,19 @@ function Book({ data }) {
       </Box>
     );
   }
-
+  const localFadeInUp = {
+    initial: { scale: 0.96, y: 30, opacity: 0 },
+    enter: { scale: 1, y: 0, opacity: 1, transition: { duration: 0.5, ease: [0.48, 0.15, 0.25, 0.96] } },
+    exit: {
+      scale: 0.6,
+      y: 100,
+      opacity: 0,
+      transition: { duration: 0.2, ease: [0.48, 0.15, 0.25, 0.96] }
+    }
+  };
   return (
     <Container sx={{ padding: [16, 32] }}>
+      <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
       <main>
         {book ? (
           <Flex
@@ -156,6 +166,7 @@ function Book({ data }) {
           <Heading>Ooops, couldn't find that book. </Heading>
         )}
       </main>
+      </motion.div>
     </Container>
   );
 }

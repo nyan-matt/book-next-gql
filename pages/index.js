@@ -2,7 +2,6 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import { allBooks } from "../utils/api";
-import Link from "next/link";
 import {
   Container,
   Button,
@@ -15,8 +14,9 @@ import {
   Badge,
   jsx,
 } from "theme-ui";
-import StarRatingComponent from "react-star-rating-component";
 import Hero from "../components/Hero";
+import BookCard from "../components/BookCard";
+import { motion } from "framer-motion";
 
 function getBooks(data) {
   return data ? data.allBooks.data.reverse() : [];
@@ -53,14 +53,12 @@ export default function Home(props) {
       <main>
         <Hero />
         <Divider />
-        <Heading mb={2}>Recent Reads</Heading>
-        
+        <Heading mb={filters.length > 0 ? 2 : 5}>Recent Reads</Heading>
         {
           filters.length > 0 &&
-          <Button variant="buttons.small" mr={2} onClick={() => handleResetFilter()}>Reset Filter</Button>
+            <Button variant="buttons.small" mr={2} onClick={() => handleResetFilter()}>Reset Filter</Button>
         }
         {
-          filters.length > 0 &&
           filters.map((filter, index) => {
             return (
               <Badge
@@ -74,80 +72,34 @@ export default function Home(props) {
             )
           })
         }
-        <Grid columns={[1, 2, 3, 4]} sx={{ mt: 32 }}>
-          {errorMessage ? (
-            <p>{errorMessage}</p>
-          ) : !data ? (
-            <Box>
-              <Spinner
-                sx={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                }}
-              />
-            </Box>
-          ) : (
-            books.map((book, index) => {
+        {errorMessage ? (
+          <p>{errorMessage}</p>
+        ) : !data ? (
+          <Box>
+            <Spinner
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          </Box>
+        ) : (
+          <Grid columns={[1, 2, 3, 4]} sx={{ mt: 32 }}>
+            {books.map((book, index) => {
               return (
-                <Box key={book._id} sx={{ margin: "16px", padding: "16px" }}>
-                  <Link href="/book/[id]" as={`/book/${book._id}`}>
-                    <AspectImage
-                      sx={{
-                        borderRadius: "4px",
-                        border: "1px solid",
-                        borderColor: "muted",
-                        cursor: "pointer",
-                      }}
-                      ratio={1 / 1}
-                      src={book.coverArt ? book.coverArt : "/no-image.png"}
-                      alt={`Cover art - ${book.title}`}
-                    />
-                  </Link>
-                  <Heading sx={{ fontSize: "18px", marginTop: "12px" }}>
-                    <Link href="/book/[id]" as={`/book/${book._id}`}>
-                      <a sx={{ variant: "links.cards" }}>{book.title}</a>
-                    </Link>
-                  </Heading>
-                  <div>
-                    {book.authors.map((author, index) => (
-                      <span key={index}>
-                        {author.name}
-                        {book.authors.length > 1 &&
-                        index < book.authors.length - 1
-                          ? ", "
-                          : " "}
-                      </span>
-                    ))}
-                  </div>
-                  {book.rating && (
-                    <StarRatingComponent
-                      name={book._id}
-                      starCount={5}
-                      value={book.rating}
-                      editing={false}
-                    />
-                  )}
-                  <div>
-                    {book.tags.map((tag, index) => (
-                      <Badge
-                        key={index}
-                        variant="primary"
-                        mr={2}
-                        px={2}
-                        sx={{ cursor: "pointer" }}
-                        onClick={() => handleFilterByTag(tag.name)}
-                      >
-                        {tag.name}
-                      </Badge>
-                    ))}
-                  </div>
-                </Box>
-              );
-            })
-          )}
-        </Grid>
+                <motion.div key={index} initial={{opacity: 0, y: 40}} 
+                  animate={{opacity: 1, y: 0}} 
+                  exit={{opacity: 0, y: 0}}
+                  positionTransition={true}
+                >
+                  <BookCard book={book} handler={handleFilterByTag} />
+                </motion.div>
+              )  
+            })}
+          </Grid>
+        )}
       </main>
     </Container>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import NextApp from "next/app";
 import Head from "next/head";
+import "../styles/index.css";
 import { ThemeProvider } from "theme-ui";
 import theme from "../styles/theme";
 import Header from "../components/Header";
@@ -9,7 +10,6 @@ import { AnimatePresence } from "framer-motion";
 export default class App extends NextApp {
   render() {
     const { Component, pageProps, router } = this.props;
-    console.log(router)
     return (
       <ThemeProvider theme={theme}>
         <Head>
@@ -19,9 +19,8 @@ export default class App extends NextApp {
         <Header />
         <AnimatePresence exitBeforeEnter key={router.route}>
           <Component {...pageProps} />
-        </AnimatePresence>        
+        </AnimatePresence>
       </ThemeProvider>
-      
     );
   }
 }

@@ -10,6 +10,7 @@ import {
   Heading,
   AspectImage,
   Badge,
+  useThemeUI,
 } from "theme-ui";
 import StarRatingComponent from "react-star-rating-component";
 import { motion } from "framer-motion";
@@ -58,7 +59,9 @@ function Book({ data }) {
   const router = useRouter();
   const [book, setBook] = useState();
   const [loading, setLoading] = useState(false);
-  //const { data, errorMessage } = bookById(id)
+  const context = useThemeUI();
+  const { theme } = context;
+
 
   useEffect(() => {
     if (data && data.findBooksByID) {
@@ -83,16 +86,7 @@ function Book({ data }) {
       </Box>
     );
   }
-  const localFadeInUp = {
-    initial: { scale: 0.96, y: 30, opacity: 0 },
-    enter: { scale: 1, y: 0, opacity: 1, transition: { duration: 0.5, ease: [0.48, 0.15, 0.25, 0.96] } },
-    exit: {
-      scale: 0.6,
-      y: 100,
-      opacity: 0,
-      transition: { duration: 0.2, ease: [0.48, 0.15, 0.25, 0.96] }
-    }
-  };
+  
   return (
     <Container sx={{ padding: [16, 32] }}>
       <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
@@ -122,11 +116,17 @@ function Book({ data }) {
             <Box
               sx={{
                 flexBasis: ["100%", "60%", "70%"],
-                paddingLeft: ["0px", "8px", "12px"],
+                paddingLeft: ["0px", "8px", "24px"],
               }}
             >
-              <Heading>{book.title}</Heading>
-              <Heading as="h2" sx={{ fontSize: 1, fontWeight: 400 }}>
+              <Heading 
+                as="h1"
+                mt={0}
+                sx={{fontSize: 6}}
+              >
+                {book.title}
+              </Heading>
+              <Heading as="h2" sx={{ fontSize: 3, fontWeight: 400 }}>
                 {book.subTitle}
               </Heading>
               <div>
@@ -145,6 +145,7 @@ function Book({ data }) {
                   starCount={5}
                   value={book.rating}
                   editing={false}
+                  starColor={theme.colors.primary}
                 />
               )}
               <div>
@@ -154,7 +155,6 @@ function Book({ data }) {
                     variant="primary"
                     mr={2}
                     px={2}
-                    sx={{ cursor: "pointer" }}
                   >
                     {tag.name}
                   </Badge>

@@ -1,13 +1,14 @@
 /** @jsx jsx */
 import React from "react";
 import Link from "next/link";
-import { Box, AspectImage, Heading, Badge, jsx } from "theme-ui";
+import { Box, AspectImage, Heading, Badge, useThemeUI, jsx } from "theme-ui";
 import StarRatingComponent from "react-star-rating-component";
 import { motion } from "framer-motion";
 
 const BookCard = ({ ...props }) => {
   const { book, handler } = props;
-  
+  const context = useThemeUI();
+  const { theme } = context;
   return (
     
     <Box sx={{ margin: "16px", padding: "16px" }}>
@@ -46,6 +47,7 @@ const BookCard = ({ ...props }) => {
           starCount={5}
           value={book.rating}
           editing={false}
+          starColor={theme.colors.primary}
         />
       )}
       <div>

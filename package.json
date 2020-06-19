@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@tailwindcss/ui": "^0.3.0",
     "framer-motion": "^1.11.0",
     "graphql-request": "^1.8.2",
     "next": "9.4.2",
@@ -16,5 +17,9 @@
     "react-icons": "^3.10.0",
     "react-star-rating-component": "^1.4.1",
     "theme-ui": "^0.3.1"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^2.3.0",
+    "tailwindcss": "^1.4.6"
   }
 }

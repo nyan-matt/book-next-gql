@@ -1,0 +1,19 @@
+/* purgecss start ignore */
+@tailwind  base;
+@tailwind  components;
+/* purgecss end ignore */
+
+@tailwind  utilities;
+
+.theme-light {
+  --primary: #f8f8f8;
+  --seconday: #dbe1e8;
+  --text-default: #12181b;
+
+}
+
+.theme-dark {
+  --primary: #12181b;
+  --seconday: #2a2a35;
+  --text-default: #f8f8f8;
+}

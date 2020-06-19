@@ -1,6 +1,7 @@
+/** @jsx jsx */
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import { createBooks } from "../utils/api";
+import { createBooks, allTags } from "../utils/api";
 import {
   Container,
   Flex,
@@ -10,9 +11,13 @@ import {
   Alert,
   Close,
   Spinner,
+  Checkbox,
+  useThemeUI,
+  jsx,
 } from "theme-ui";
 import Button from "../components/Button";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import StarRatingComponent from 'react-star-rating-component';
 
 export default function Add(props) {
   const [title, setTitle] = useState("");
@@ -21,7 +26,14 @@ export default function Add(props) {
   const [alert, setAlert] = useState({ show: false, message: "message" });
   const [coverArt, setCoverArt] = useState("");
   const [loading, setLoading] = useState(false);
-  const [bookTitles, setBookTitles] = useState({});
+  const [rating, setRating] = useState();
+  const [tags, setTags] = useState([]);
+  const [taglist, setTaglist] = useState([]);
+  const { data, error } = allTags();
+  const context = useThemeUI();
+  const { theme } = context;
+
+  console.log(theme.colors)
   const GBAPI =
     "https://www.googleapis.com/books/v1/volumes?printType=books&maxResults=5&printType=books&";
 
@@ -56,6 +68,12 @@ export default function Add(props) {
     fetchAuthorsFromTitle();
   };
 
+  useEffect(() => {
+    if (data && data.allTags) {
+      setTaglist(data.allTags.data.map(tag => tag.tagName))
+    }
+  }, [data])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const book = {
@@ -63,6 +81,7 @@ export default function Add(props) {
       subTitle: subTitle,
       coverArt: coverArt,
       authors: authors,
+      rating: rating,
     };
     setLoading(true);
     createBooks(book).then((response) => {
@@ -117,6 +136,7 @@ export default function Add(props) {
     setAlert({ show: false, message: "" });
   };
 
+  console.log(tags);
   return (
     <Container>
       <main>
@@ -207,6 +227,39 @@ export default function Add(props) {
               value={coverArt}
               onChange={(e) => setCoverArt(e.target.value)}
             />
+            <Flex sx={{flexWrap: 'wrap'}}>
+            <Box sx={{flexBasis:['100%', '40%', '30%']}}>
+            <Label htmlFor="rating">Rating</Label>
+            <StarRatingComponent 
+              name="rating" 
+              starCount={5}
+              value={rating}
+              onStarClick={(e) => setRating(e)}
+              starColor={theme.colors.primary}
+              sx={{fontSize:'36px', display:'block'}}
+            />
+            </Box>
+            <Box sx={{flexBasis:['100%', '60%', '70%']}}>
+              <Label htmlFor="tags" mb={2}>Tags</Label>
+              <Flex sx={{ flexWrap: 'wrap'}}>
+              {
+                taglist && taglist.length > 0 &&
+                taglist.map((tag, index) => {
+                  return (
+                    <Box key={index} mx={1}>
+                    <Label key={index} p={2} sx={{border: '1px solid', borderRadius: '4px', borderColor: 'muted' }}>
+                    <Checkbox name="tags" value={tag}  
+                    onChange={(e) => e.target.checked 
+                      ? setTags([...tags,  e.target.value]) 
+                      : setTags(tags.filter((i) => (i !== e.target.value)))} 
+                    />{tag}</Label>
+                    </Box>
+                  )
+                })
+              }
+              </Flex>
+            </Box>
+            </Flex>  
             <Button
               foo="bar"
               onSubmit={handleSubmit}

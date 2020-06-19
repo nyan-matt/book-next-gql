@@ -25,7 +25,7 @@ function getBooks(data) {
 export default function Home(props) {
   const { data, errorMessage } = allBooks();
   const [books, setBooks] = useState([]);
-  const [filters, setFilters] = useState([])
+  const [filters, setFilters] = useState([]);
 
   useEffect(() => {
     if (!books.length) {
@@ -49,11 +49,11 @@ export default function Home(props) {
   };
 
   return (
-    <Container sx={{ padding: [16, 32] }}>
+    <div className="container mx-auto flex relative">
       <main>
         <Hero />
-        <Divider />
-        <Heading mb={filters.length > 0 ? 2 : 5}>Recent Reads</Heading>
+        <Divider my={4}/>
+        <Heading mb={filters.length > 0 ? 2 : 5}>Recommended Reads</Heading>
         {
           filters.length > 0 &&
             <Button variant="buttons.small" mr={2} onClick={() => handleResetFilter()}>Reset Filter</Button>
@@ -101,6 +101,6 @@ export default function Home(props) {
           </Grid>
         )}
       </main>
-    </Container>
+    </div>
   );
 }

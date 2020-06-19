@@ -1,12 +1,11 @@
-import { FaBorderNone } from "react-icons/fa";
 
 export default {
   useColorSchemeMediaQuery: true,
   colors: {
     text: '#000000',
     background: '#ffffff',
-    primary: '#62A0A5',
-    secondary: '#111199',
+    primary: '#017EC9',
+    secondary: '#5BB75B',
     muted: '#f6f6f6',
     highlight: '#efeffe', // '#ffffcc',
     gray: '#777777',
@@ -116,11 +115,10 @@ export default {
     nav: {
       display: 'block',
       width: '100%',
-      px: 2,
-      py: 2,
       color: 'inherit',
       textDecoration: 'none',
       fontSize: 1,
+      pl: 2,
       fontWeight: '500',
       bg: 'transparent',
       transitionProperty: 'background-color',
@@ -133,6 +131,10 @@ export default {
   badges: {
     primary: {
       color: 'background',
+    },
+    secondary: {
+      color: 'background',
+      bg: 'secondary',
     },
     highlight: {
       color: 'text',

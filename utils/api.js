@@ -126,3 +126,34 @@ export const createBooks = async (book) => {
     errors,
   };
 };
+
+// get all tags query
+export const allTags = (limit) => {
+  const query = `query allTags($size: Int) {
+    allTags(_size: $size) {
+      data {
+        _id
+        tagName
+      }
+    }
+  }`;
+  const size = limit || 100;
+  const { data, error } = useFetch(URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${SECRET}`,
+      "Content-type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      variables: { size },
+    }),
+  });
+
+  return {
+    data: getData(data),
+    errorMessage: getErrorMessage(error, data),
+    error,
+  };
+};

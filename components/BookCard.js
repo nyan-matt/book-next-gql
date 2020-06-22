@@ -1,39 +1,27 @@
-/** @jsx jsx */
 import React from "react";
 import Link from "next/link";
-import { Box, AspectImage, Heading, Badge, useThemeUI, jsx } from "theme-ui";
 import StarRatingComponent from "react-star-rating-component";
 import { motion } from "framer-motion";
 
 const BookCard = ({ ...props }) => {
   const { book, handler } = props;
-  const context = useThemeUI();
-  const { theme } = context;
   return (
-    
-    <Box sx={{ margin: "16px", padding: "16px" }}>
+    <div className="rounded">
+    <div className="relative pb-full">
       <Link href="/book/[id]" as={`/book/${book._id}`}>
-        <AspectImage
-          sx={{
-            borderRadius: "8px",
-            border: "1px solid",
-            borderColor: "highlight",
-            cursor: "pointer",
-          }}
-          ratio={1 / 1}
-          src={book.coverArt ? book.coverArt : "/no-image.png"}
+        <img className="absolute w-full h-full object-cover rounded border border-gray-500 cursor-pointer" src={book.coverArt ? book.coverArt : "/no-image.png"}
           alt={`Cover art - ${book.title}`}
         />
-        
       </Link>
-      <Heading sx={{ fontSize: "18px", marginTop: "12px" }}>
+      </div>
+      <h3 className="mt-2">
         <Link href="/book/[id]" as={`/book/${book._id}`}>
-          <a sx={{ variant: "links.cards" }}>{book.title}</a>
+          <a className="text-primary font-medium">{book.title}</a>
         </Link>
-      </Heading>
+      </h3>
       <div>
         {book.authors.map((author, index) => (
-          <span key={index}>
+          <span key={index} className="text-default">
             {author.name}
             {book.authors.length > 1 && index < book.authors.length - 1
               ? ", "
@@ -47,25 +35,20 @@ const BookCard = ({ ...props }) => {
           starCount={5}
           value={book.rating}
           editing={false}
-          starColor={theme.colors.primary}
         />
       )}
       <div>
         {book.tags.map((tag, index) => (
-          <Badge
+          <span
             key={index}
-            variant="primary"
-            mr={2}
-            px={2}
-            sx={{ cursor: "pointer" }}
+            className="text-xs bg-transparent rounded mr-1 text-primary px-2 py-1 cursor-pointer border border-primary hover:bg-primary hover:text-reverse-primary transition duration-200"
             onClick={() => handler(tag.name)}
           >
             {tag.name}
-          </Badge>
+          </span>
         ))}
       </div>
-      
-    </Box>
+    </div>
     
   );
 };

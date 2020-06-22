@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
-
-export default (props) => {
+import { RiContrast2Line, RiGithubLine } from "react-icons/ri"
+const Header = ({ ...props })  => {
+  const { currentTheme, handler } = props;
   const [navOpen, setNavOpen] = useState(false);
+  const [theme, setTheme] = useState(currentTheme);
+  
+  useEffect(() => {
+    handler(theme);
+  },[theme])
 
   return (
-    <nav className="flex justify-between flex-wrap theme-light bg-primary py-3 px-4">
-      <div className="flex flex-shrink-0 items-center text-default">
+    <nav className="flex justify-between flex-wrap bg-background-default primary py-3 px-4">
+      <div className="flex flex-shrink-0 items-center text-foreground-default">
         <Link href="/">
-          <a className="no-underline hover:text-white hover:no-underline text-2xl">
+          <a className="no-underline hover:no-underline text-2xl">
             <svg
               className="fill-current h-8 w-8 inline-block"
               viewBox="0 0 64 64"
@@ -25,7 +31,7 @@ export default (props) => {
 
       <div className="block lg:hidden">
         <button
-          class="flex items-center px-3 py-2 border rounded text-white hover:text-white hover:border-white focus:outline-none"
+          className="flex items-center px-3 py-2 border rounded text-default hover:text-white hover:border-white focus:outline-none"
           onClick={() => setNavOpen(!navOpen)}
         >
           <svg
@@ -40,21 +46,21 @@ export default (props) => {
       </div>
 
       <div
-        className={`w-full text-primary flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-0 ${
+        className={`w-full text-foreground-default flex-grow lg:flex lg:items-center lg:w-auto lg:block pt-6 lg:pt-0 ${
           navOpen ? "" : "hidden"
         }`}
       >
         <ul className="list-reset lg:flex justify-end flex-1 items-center">
           <li className="mr-3">
             <Link href="/foo">
-              <a className="inline-block py-2 px-4 no-underline transition duration-200 hover:text-gray-200">
+              <a className="inline-block py-2 px-4 no-underline transition duration-200 hover:text-primary hover:underline">
                 Add a Book
               </a>
             </Link>
           </li>
           <li className="mr-3">
             <a
-              className="inline-block py-2 px-4 no-underline transition duration-200 hover:text-gray-200"
+              className="inline-block py-2 px-4 no-underline transition duration-200 hover:text-primary hover:underline"
               href="#"
             >
               BookShelf
@@ -62,22 +68,21 @@ export default (props) => {
           </li>
           <li className="mr-3">
             <a
-              className="inline-block py-2 px-4 no-underline transition duration-200 hover:text-gray-200 hover:text-underline"
+              className="inline-block py-2 px-4 no-underline transition duration-200 hover:text-primary hover:underline"
               href="#"
             >
               About
             </a>
           </li>
-          <li className="">
-            <a
-              className="inline-block text-2xl mt-1 no-underline pl-2 transition duration-200 hover:text-gray-200"
-              href="#"
-            >
-              <FaGithub />
-            </a>
+          <li className="inline-block text-2xl no-underline pl-2 transition duration-200 hover:text-primary hover:underline">
+            <RiContrast2Line className="" onClick={
+              () => setTheme(theme === 'dark' ? 'light' : 'dark')
+            } />
           </li>
         </ul>
       </div>
     </nav>
   );
 };
+
+export default Header

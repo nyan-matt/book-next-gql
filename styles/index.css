@@ -6,14 +6,35 @@
 @tailwind  utilities;
 
 .theme-light {
-  --primary: #f8f8f8;
-  --seconday: #dbe1e8;
-  --text-default: #12181b;
+  --background-default: #f8f8f8;
+  --foreground-default: #12181b;
+  --primary: #0074CC;
+  --secondary: #DF7101;
+  --tertiary: #389292;
+  --accent: #ffb400;
+  --success: #a6d1a6;
+  --warning: #d1c6a6;
+  --danger: #d1a7a6;
+  --info: #a6b4d1;
+  --reverse-primary: #FFFFFF;
+  
 
 }
 
 .theme-dark {
-  --primary: #12181b;
-  --seconday: #2a2a35;
-  --text-default: #f8f8f8;
+  --background-default: #12181b;
+  --foreground-default: #f8f8f8;
+  --primary: #FF1F93;
+  --secondary: #5BB75B;
+  --tertiary: #708c91;
+  --accent: #ffb400;
+  --success: #a6d1a6;
+  --warning: #d1c6a6;
+  --danger: #d1a7a6;
+  --info: #a6b4d1;
+  --reverse-primary: #000000;
+}
+
+.wrapper {
+  min-height: 100vh;
 }

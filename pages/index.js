@@ -1,19 +1,7 @@
-/** @jsx jsx */
+
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import { allBooks } from "../utils/api";
-import {
-  Container,
-  Button,
-  Spinner,
-  Grid,
-  Box,
-  Heading,
-  AspectImage,
-  Divider,
-  Badge,
-  jsx,
-} from "theme-ui";
 import Hero from "../components/Hero";
 import BookCard from "../components/BookCard";
 import { motion } from "framer-motion";
@@ -48,58 +36,80 @@ export default function Home(props) {
     setFilters([])
   };
 
+  const stagger = (staggerChildren = 0.3) => { 
+    return { 
+        animate: { 
+          transition: { 
+            staggerChildren
+          }
+        }
+      }
+}
   return (
     <div className="container mx-auto flex relative">
-      <main>
+      <main className="relative">
         <Hero />
-        <Divider my={4}/>
-        <Heading mb={filters.length > 0 ? 2 : 5}>Recommended Reads</Heading>
-        {
-          filters.length > 0 &&
-            <Button variant="buttons.small" mr={2} onClick={() => handleResetFilter()}>Reset Filter</Button>
-        }
-        {
-          filters.map((filter, index) => {
-            return (
-              <Badge
-                key={index}
-                variant="primary"
-                mr={2}
-                px={2}
-              >
-                {filter}
-              </Badge>
-            )
-          })
-        }
-        {errorMessage ? (
-          <p>{errorMessage}</p>
-        ) : !data ? (
-          <Box>
-            <Spinner
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            />
-          </Box>
-        ) : (
-          <Grid columns={[1, 2, 3, 4]} sx={{ mt: 32 }}>
-            {books.map((book, index) => {
+        <h2 className="text-foreground-default font-thin text-2xl mb-2 mx-4  mt-12 lg:mt-0">Recommended Reads</h2>
+        <div className="mx-4 h-12">
+          {
+            filters.length > 0 && 
+              (
+                <button className="bg-primary text-reverse-primary rounded-full py-2 px-4 rounded text-xs" onClick={() => handleResetFilter()}>Reset Filter</button>
+              )
+          }
+          {
+            filters.map((filter, index) => {
               return (
-                <motion.div key={index} initial={{opacity: 0, y: 40}} 
-                  animate={{opacity: 1, y: 0}} 
-                  exit={{opacity: 0, y: 0}}
-                  positionTransition={true}
+                <span
+                  key={index}
+                  className="ml-1 text-xs bg-transparent rounded mr-1 text-primary px-2 py-1 border border-primary"
                 >
-                  <BookCard book={book} handler={handleFilterByTag} />
-                </motion.div>
-              )  
-            })}
-          </Grid>
-        )}
+                  {filter}
+                </span>
+              )
+            })
+          }
+        </div>  
+        {
+          errorMessage &&
+            <p>{errorMessage}</p>
+        }
+        {
+          !data ? 
+            (
+            <div className="container mx-auto">
+              <motion.div className="container mx-auto border bg-color-gray-500 border-full h-12 w-12"
+                animate={{
+                  scale: [1, 2, 2, 1, 1],
+                  rotate: [0, 0, 270, 270, 0],
+                  borderRadius: ["20%", "20%", "50%", "50%", "20%"]
+                }}
+                transition={{
+                  duration: 2,
+                  ease: "easeInOut",
+                  times: [0, 0.2, 0.5, 0.8, 1],
+                  loop: Infinity,
+                  repeatDelay: 1
+                }}
+              />
+            </div>
+           ) : (
+            <motion.div variants={stagger(0.3)}  className="relative grid gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-4">
+              {books.map((book, index) => {
+                  return (
+                    <motion.div key={index} initial={{opacity: 0, y: 40}} 
+                      animate={{opacity: 1, y: 0}} 
+                      exit={{opacity: 0, y: 0}}
+                      positionTransition={true}
+                    >
+                      <BookCard key={index} book={book} handler={handleFilterByTag} />
+                  </motion.div>
+                  )
+              })}
+              </motion.div>        
+          )
+      }
+        
       </main>
     </div>
   );

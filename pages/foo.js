@@ -12,7 +12,6 @@ import {
   Close,
   Spinner,
   Checkbox,
-  useThemeUI,
   jsx,
 } from "theme-ui";
 import Button from "../components/Button";
@@ -30,10 +29,10 @@ export default function Add(props) {
   const [tags, setTags] = useState([]);
   const [taglist, setTaglist] = useState([]);
   const { data, error } = allTags();
-  const context = useThemeUI();
-  const { theme } = context;
+  
+  
 
-  console.log(theme.colors)
+  
   const GBAPI =
     "https://www.googleapis.com/books/v1/volumes?printType=books&maxResults=5&printType=books&";
 
@@ -235,7 +234,6 @@ export default function Add(props) {
               starCount={5}
               value={rating}
               onStarClick={(e) => setRating(e)}
-              starColor={theme.colors.primary}
               sx={{fontSize:'36px', display:'block'}}
             />
             </Box>

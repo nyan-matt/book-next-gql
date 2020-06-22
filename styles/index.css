@@ -5,6 +5,7 @@
 
 @tailwind  utilities;
 
+/* purgecss start ignore */
 .theme-light {
   --background-default: #f8f8f8;
   --foreground-default: #12181b;
@@ -38,3 +39,5 @@
 .wrapper {
   min-height: 100vh;
 }
+
+/* purgecss end ignore */

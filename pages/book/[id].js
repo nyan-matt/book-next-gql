@@ -33,6 +33,7 @@ export async function getStaticProps({ params }) {
       subTitle
       rating
       coverArt
+      comments
       authors {
         name
       }
@@ -68,11 +69,11 @@ function Book({ data }) {
   }
   
   return (
-    <div className="lg:pt-32 sm:pt-0 lg:pb-40 sm:pb-2">
+    <div className="lg:pt-32 sm:pt-16 lg:pb-40 sm:pb-2">
         {book ? (
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="container mx-auto px-6 md:flex">  
           <div className="w-full md:w-1/2">
-            <img className="w-full rounded" src={book.coverArt ? book.coverArt : "/no-image.png"}
+            <img className="w-full rounded border border-color-gray-500" src={book.coverArt ? book.coverArt : "/no-image.png"}
               alt={`Cover art - ${book.title}`}
             />
             
@@ -85,10 +86,6 @@ function Book({ data }) {
               {book.subTitle}
               </h2>
             <div className="text-default mt-8">
-              {book.authors.length > 1
-                      ? "Authors: "
-                      : "Author: " }
-                      <br/>
                 {book.authors.map((author, index) => (
                   <span key={index}>
                     {author.name}
@@ -98,28 +95,29 @@ function Book({ data }) {
                   </span>
                 ))}
               </div>
-              <div className="text-default mt-2">
-                Rating: <br/>
+              <div className="text-default">
                 {book.rating && (
                   <StarRatingComponent
                     name={book._id}
                     starCount={5}
                     value={book.rating}
-                    className="top-2 ml-2"
                     editing={false}
+                    className="text-2xl"
                   />
                 )}
               </div>
-              <div className="text-default mt-3">
-                Tags: <br/>
+              <div className="text-default">
                 {book.tags.map((tag, index) => (
                   <span 
                     key={index}
-                    className="text-xs bg-transparent rounded ml-2 text-primary px-2 py-1 border border-primary"
+                    className="text-xs bg-transparent rounded mr-2 text-primary px-2 py-1 border border-primary"
                   >
                     {tag.name}
                   </span>
                 ))}
+              </div>
+              <div className="text-default mt-8 blockquote">
+                {book.comments}
               </div>
           </div>
         </motion.div>

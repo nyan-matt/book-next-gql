@@ -112,6 +112,7 @@ function Book({ data }) {
                   name={book._id}
                   starCount={5}
                   value={book.rating}
+                  starColor=""
                   editing={false}
                   className="text-2xl"
                 />

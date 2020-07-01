@@ -27,7 +27,7 @@ export default (props) => {
         <div className="flex mt-8">
           <a
             href="#"
-            className="uppercase py-2 px-4  rounded-full bg-primary border-2 border-transparent text-reverse-primary text-sm text-center hover:bg-primary"
+            className="uppercase py-2 px-4  rounded-full bg-primary border-2 border-transparent text-white text-sm text-center hover:bg-primary"
           >
             <RiGithubLine className="inline text-xl mr-1" />
             Github

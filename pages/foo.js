@@ -2,6 +2,7 @@
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import { createBooks, allTags } from "../utils/api";
+import { motion } from "framer-motion";
 import {
   Container,
   Flex,
@@ -25,6 +26,7 @@ export default function Add(props) {
   const [alert, setAlert] = useState({ show: false, message: "message" });
   const [coverArt, setCoverArt] = useState("");
   const [loading, setLoading] = useState(false);
+  const [comments, setComments] = useState();
   const [rating, setRating] = useState();
   const [tags, setTags] = useState([]);
   const [taglist, setTaglist] = useState([]);
@@ -137,127 +139,161 @@ export default function Add(props) {
 
   console.log(tags);
   return (
-    <Container>
-      <main>
-        <h1>Add Book</h1>
+    <div className="container mx-auto">
+      <div className="mx-4">
+        <h1 className="text-default text-2xl mt-12">Add Book</h1>
         {alert.show ? (
-          <Alert mb={4} variant="sucess">
+          <div>
             {alert.message}
-            <Close ml="auto" sx={{ minWidth: "32px" }} onClick={closeAlert} />
-          </Alert>
+            <span onClick={closeAlert} />
+          </div>
         ) : null}
         {loading ? (
-          <Box>
-            <Spinner
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
+          <div className="container mx-auto">
+            <motion.div className="container mx-auto border bg-color-gray-500 border-full h-12 w-12"
+              animate={{
+                scale: [1, 2, 2, 1, 1],
+                rotate: [0, 0, 270, 270, 0],
+                borderRadius: ["20%", "20%", "50%", "50%", "20%"]
+              }}
+              transition={{
+                duration: 2,
+                ease: "easeInOut",
+                times: [0, 0.2, 0.5, 0.8, 1],
+                loop: Infinity,
+                repeatDelay: 1
               }}
             />
-          </Box>
+          </div>
         ) : (
-          <Box as="form" onSubmit={(e) => handleSubmit(e)}>
-            <Label htmlFor="title">Title</Label>
-            <Input
-              name="title"
-              placeholder="The Hobbit"
-              required
-              mb={3}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              onBlur={() => handleLookAhead()}
-            />
-            <Label htmlFor="title">Subtitle</Label>
-            <Input
-              name="subTitle"
-              placeholder="There and Back Again"
-              mb={3}
-              value={subTitle}
-              onChange={(e) => setSubTitle(e.target.value)}
-            />
-            <Label>{authors.length > 1 ? "Authors" : "Author"}</Label>
-            {authors.map((author, index) => {
-              return (
-                <Flex key={`authors${index}`}>
-                  <Box sx={{ flex: "1 1 auto" }}>
-                    <Input
-                      name={`authors${index}`}
-                      placeholder={index === 0 ? "J.R.R. Tolkien" : ""}
-                      value={authors[index].name}
-                      onChange={(e) =>
-                        handleAuthorChange(index, e.target.value)
-                      }
-                      mb={3}
-                    />
-                  </Box>
-                  <Box>
-                    {index === 0 && (
-                      <Box
-                        key={index}
-                        as="button"
-                        sx={{ height: "42px", ml: "6px" }}
-                        onClick={(e) => handleAddAuthor(e)}
-                        disabled={!authors[0].name}
-                      >
-                        <FaPlus />
-                      </Box>
-                    )}
-                    {index !== 0 && (
-                      <Box
-                        key={index}
-                        as="button"
-                        sx={{ height: "42px", ml: "6px" }}
-                        onClick={(e) => handleDeleteAuthor(e, index)}
-                      >
-                        <FaMinus />
-                      </Box>
-                    )}
-                  </Box>
-                </Flex>
-              );
-            })}
-            <Label htmlFor="coverArt">Cover Art</Label>
-            <Input
-              name="coverArt"
-              placeholder="https://example.com/bookcover.jpg"
-              mb={3}
-              value={coverArt}
-              onChange={(e) => setCoverArt(e.target.value)}
-            />
-            <Flex sx={{flexWrap: 'wrap'}}>
-            <Box sx={{flexBasis:['100%', '40%', '30%']}}>
-            <Label htmlFor="rating">Rating</Label>
-            <StarRatingComponent 
-              name="rating" 
-              starCount={5}
-              value={rating}
-              onStarClick={(e) => setRating(e)}
-              sx={{fontSize:'36px', display:'block'}}
-            />
-            </Box>
-            <Box sx={{flexBasis:['100%', '60%', '70%']}}>
-              <Label htmlFor="tags" mb={2}>Tags</Label>
-              <Flex sx={{ flexWrap: 'wrap'}}>
-              {
-                taglist && taglist.length > 0 &&
-                taglist.map((tag, index) => {
-                  return (
-                    <Box key={index} mx={1}>
-                    <Label key={index} p={2} sx={{border: '1px solid', borderRadius: '4px', borderColor: 'muted' }}>
-                    <Checkbox name="tags" value={tag}  
-                    onChange={(e) => e.target.checked 
-                      ? setTags([...tags,  e.target.value]) 
-                      : setTags(tags.filter((i) => (i !== e.target.value)))} 
-                    />{tag}</Label>
-                    </Box>
-                  )
-                })
-              }
-              </Flex>
-            </Box>
-            </Flex>  
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div className="flex flex-col w-full">
+          
+            <div className="w-full">
+              <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-4 mb-2">Title</label>
+              <input className="appearance-none bg-background-default block w-full text-default border rounded py-3 px-4 border-primary focus:shadow-focus focus:outline-none focus:border-primary transition duration-400 "
+                name="title"
+                placeholder="The Hobbit"
+                required
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                onBlur={() => handleLookAhead()}
+              />
+            </div>
+            <div className="w-full">
+              <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-4 mb-2">Subtitle</label>
+              <input className="appearance-none bg-background-default block w-full text-default border rounded py-3 px-4 border-primary focus:shadow-focus focus:outline-none focus:border-primary transition duration-400 "
+                name="subTitle"
+                placeholder="There and Back Again"
+                value={subTitle}
+                onChange={(e) => setSubTitle(e.target.value)}
+              />
+            </div>
+            <div className="w-full">
+              <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-4 mb-2">{authors.length > 1 ? "Authors" : "Author"}</label>
+              {authors.map((author, index) => {
+                return (
+                  <div key={`authors${index}`} className="flex mb-3">
+                    <div className="flex-grow">
+                      <input
+                        className="appearance-none bg-background-default block w-full text-default border border-r-0 rounded rounded-r-none py-3 px-4 border-primary focus:shadow-focus focus:outline-none focus:border-primary transition duration-400 "
+                        name={`authors${index}`}
+                        placeholder={index === 0 ? "J.R.R. Tolkien" : ""}
+                        value={authors[index].name}
+                        onChange={(e) =>
+                          handleAuthorChange(index, e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="">
+                      {index === 0 && (
+                        <button
+                          key={index}
+                          onClick={(e) => handleAddAuthor(e)}
+                          disabled={!authors[0].name}
+                          className="border border-primary rounded-l-none py-3 px-4 rounded border-l-0 h-full focus:shadow-focus focus:outline-none focus:border-primary transition duration-200 "
+                          tabIndex="0"
+                          role="button"
+                        >
+                          <FaPlus className={`${!authors[0].name ? 'text-gray-500' : 'text-primary'}`} />
+                        </button>
+                      )}
+                      {index !== 0 && (
+                        <button
+                          key={index}
+                          onClick={(e) => handleDeleteAuthor(e, index)}
+                          className="border border-primary rounded-l-none py-3 px-4 rounded border-l-0 h-full focus:shadow-focus focus:outline-none focus:border-primary transition duration-200 "
+                        >
+                          <FaMinus className="text-primary" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="w-full">
+              <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-3 mb-2">Cover Art URL</label>
+              <input className="appearance-none bg-background-default block w-full text-default border rounded py-3 px-4 border-primary focus:shadow-focus focus:outline-none focus:border-primary transition duration-400 "
+                name="coverArt"
+                placeholder="https://example/com/path/to/coverart.jpg"
+                value={coverArt}
+                onChange={(e) => setCoverArt(e.target.value)}
+              />
+            </div>
+            <div className="w-full">
+              <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-3 mb-2">Review</label>
+              <textarea className="appearance-none bg-background-default block w-full text-default border rounded py-3 px-4 border-primary focus:shadow-focus focus:outline-none focus:border-primary transition duration-400 "
+                name="comments"
+                placeholder=""
+                value={comments}
+                onChange={(e) => setComments(e.target.value)}
+              />
+            </div>
+            <div className="w-full">
+              <div className="flex flex-wrap">
+                <div className="w-full sm:w-1/3 lg:w-1/5">
+                  <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-4 mb-2">Rating</label>
+                  <StarRatingComponent 
+                    name="rating" 
+                    starCount={5}
+                    value={rating}
+                    starColor=""
+                    className="text-4xl -mt-3"
+                    onStarClick={(e) => setRating(e)}
+                  />
+                </div>
+                <div className="w-full sm:w-2/3 lg:w-4/5">
+                  <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-4 mb-2">Tags</label>
+                  {
+                  taglist && taglist.length > 0 &&
+                  taglist.map((tag, index) => {
+                    return (
+                      <span key={index} className="relative border border-primary inline-block rounded-full mr-2 px-2 mb-2 bg-primary">
+                        <label className="check-button text-white pl-3">
+                          {tag}
+                            <input id={tag} type="checkbox" name="tags" value={tag} className=" ml-3"
+                              onChange={(e) => e.target.checked 
+                                ? setTags([...tags,  e.target.value]) 
+                                : setTags(tags.filter((i) => (i !== e.target.value)))} 
+                            />
+                            <span className="checkmark"></span>
+                        </label>
+                      </span>
+                      
+                    )
+                  })
+                  }
+                </div>
+              </div>
+            </div>
+            
+
+
+
+
+
+
             <Button
               foo="bar"
               onSubmit={handleSubmit}
@@ -265,9 +301,11 @@ export default function Add(props) {
             >
               Submit
             </Button>
-          </Box>
+            </div>
+          </form>
+          
         )}
-      </main>
-    </Container>
+    </div>
+    </div>
   );
 }

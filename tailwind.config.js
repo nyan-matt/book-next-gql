@@ -33,8 +33,8 @@ module.exports = {
         '4/5': '80%',
         'full': '100%',
       },
-      inset: {
-        '1/2': '50%',
+      boxShadow: {
+        'focus': '0 0 0 3px var(--primary)',
       },
     },
   },

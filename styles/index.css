@@ -40,4 +40,55 @@
   min-height: 100vh;
 }
 
+.check-button {
+  margin-left: 12px;
+}
+.check-button input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 16px;
+  width: 16px;
+  background-color: var(--primary);
+  border: 1px solid #FFFFFF;
+  margin: 4px 8px;
+  border-radius:4px;
+}
+.check-button:hover input ~ .checkmark {
+  border: 1px solid #FFF;
+  background-color: var(--primary);
+}
+.check-button input:checked ~ .checkmark {
+  background-color: var(--primary);
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.check-button input:checked ~ .checkmark:after {
+  display: block;
+}
+.check-button .checkmark:after {
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.dv-star-rating-star {
+  color: var(--primary);
+}
+
 /* purgecss end ignore */

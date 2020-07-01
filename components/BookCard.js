@@ -34,6 +34,7 @@ const BookCard = ({ ...props }) => {
           name={book._id}
           starCount={5}
           value={book.rating}
+          starColor=""
           editing={false}
         />
       )}

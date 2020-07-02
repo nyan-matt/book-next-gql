@@ -52,8 +52,8 @@
 }
 .checkmark {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 4px;
+  left: 2px;
   height: 16px;
   width: 16px;
   background-color: var(--primary);

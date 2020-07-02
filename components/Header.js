@@ -29,9 +29,15 @@ const Header = ({ ...props })  => {
         </Link>
       </div>
 
-      <div className="block lg:hidden">
+      <div className="flex lg:hidden">
+        <div className="flex items-center mr-4">
+              <RiContrast2Line className="text-default text-2xl inline-block" onClick={
+                () => setTheme(theme === 'dark' ? 'light' : 'dark')
+                } 
+              />
+            </div>
         <button
-          className="flex items-center px-3 py-2 border rounded text-default hover:text-white hover:border-white focus:outline-none"
+          className="flex items-center px-3 py-2 border rounded text-default  focus:outline-none"
           onClick={() => setNavOpen(!navOpen)}
         >
           <svg
@@ -50,17 +56,17 @@ const Header = ({ ...props })  => {
           navOpen ? "" : "hidden"
         }`}
       >
-        <ul className="list-reset lg:flex justify-end flex-1 items-center">
+        <ul className="list-reset lg:flex justify-end flex-1 items-center shadow-sm lg:shadow-none">
           <li className="mr-3">
             <Link href="/foo">
-              <a className="inline-block py-2 px-4 no-underline transition duration-200 hover:text-primary hover:underline">
+              <a className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline">
                 Add a Book
               </a>
             </Link>
           </li>
           <li className="mr-3">
             <a
-              className="inline-block py-2 px-4 no-underline transition duration-200 hover:text-primary hover:underline"
+              className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline"
               href="#"
             >
               BookShelf
@@ -68,13 +74,13 @@ const Header = ({ ...props })  => {
           </li>
           <li className="mr-3">
             <a
-              className="inline-block py-2 px-4 no-underline transition duration-200 hover:text-primary hover:underline"
+              className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline"
               href="#"
             >
               About
             </a>
           </li>
-          <li className="inline-block text-2xl no-underline pl-2 transition duration-200 hover:text-primary hover:underline">
+          <li className="hidden lg:block text-2xl no-underline pl-2 transition duration-400 hover:text-primary hover:underline">
             <RiContrast2Line className="" onClick={
               () => setTheme(theme === 'dark' ? 'light' : 'dark')
             } />

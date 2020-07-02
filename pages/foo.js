@@ -320,7 +320,7 @@ export default function Add(props) {
 
               <button
                 className={`uppercase py-2 px-4 rounded-full bg-primary border-2 border-transparent text-sm text-center mt-6 text-white
-              ${!title || !authors[0].name ? "opacity-50" : ""}
+              ${!title || !authors[0].name ? "opacity-50 cursor-not-allowed" : ""}
             `}
                 onSubmit={handleSubmit}
                 disabled={!title || !authors[0].name}

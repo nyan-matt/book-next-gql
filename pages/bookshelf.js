@@ -12,7 +12,7 @@ function getBooks(data) {
 }
 
 export default function Bookshelf(props) {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, login } = useAuth();
   const { data, errorMessage } = booksByUser(user.email ? user.email : "guest");
   const [books, setBooks] = useState([]);
   const [filters, setFilters] = useState([]);
@@ -26,7 +26,7 @@ export default function Bookshelf(props) {
 
   useEffect(() => {
     setFetched(true);
-    console.log(books.length);
+    
   }, [books])
 
   // TODO abstract filtering
@@ -53,72 +53,84 @@ export default function Bookshelf(props) {
     )
   }
 
-  const DisplayAddBookForm = () => {
-    
-    return (
+  const Display = () => {
+    if (books.length > 0 ) {
+      return (
       <>
-      <p className="text-default">
-        Looks like you haven't added anything to your book shelf yet. Why not add your first below?
-      </p>
-      { fetched && <AddBookForm /> }
+        { isAuthenticated() ? 
+          <p className="text-default"> You have {books.length} books on your shelf.</p>
+          :
+          <div>
+            <p className="text-default"> 
+              You're not logged in at the moment, but here you can see books added by other guests. You can <a href onClick={login} className="text-primary cursor-pointer ">Login</a>  to create a bookshelf of your own.
+            </p>
+            
+          </div>
+        }
+        
+        <div className="mx-4 h-12">
+          {
+            filters.length > 0 && 
+              (
+                <button className="bg-primary text-reverse-primary rounded-full py-2 px-4 rounded text-xs" onClick={() => handleResetFilter()}>Reset Filter</button>
+              )
+          }
+          {
+            filters.map((filter, index) => {
+              return (
+                <span
+                  key={index}
+                  className="ml-1 text-xs bg-transparent rounded mr-1 text-primary px-2 py-1 border border-primary"
+                >
+                  {filter}
+                </span>
+              )
+            })
+          }
+          </div>  
+          <motion.div className="relative grid gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-4">
+          {books.map((book, index) => {
+              return (
+                <motion.div key={index} initial={{opacity: 0, y: 40}} 
+                  animate={{opacity: 1, y: 0}} 
+                  exit={{opacity: 0, y: 0}}
+                  positionTransition={true}
+                >
+                  <BookCard key={index} book={book} handler={handleFilterByTag} />
+              </motion.div>
+              )
+          })}
+          </motion.div>
       </>
-    );
+      )
+    } else {
+      return (
+        <>
+          <p className="text-default"> You have no books on your shelf. You can add a book by submitting the form below.</p>
+          <AddBookForm />
+        </>
+      )
+    }
   }
   
   return (
     <div className="container mx-auto flex relative">
-      
       <main className="relative w-full">
         <h1 className="text-default text-4xl">
-          {isAuthenticated() ? user.email : "guest"}
+          Welcome to your bookshelf, 
+          {' '}
+          {
+            typeof window !== 'undefined' && 
+              isAuthenticated() ? user.nickname : "guest"
+          }
         </h1>
         {
-          isAuthenticated() &&
-            (
-              <>
-              <div className="mx-4 h-12">
-              {
-                filters.length > 0 && 
-                  (
-                    <button className="bg-primary text-reverse-primary rounded-full py-2 px-4 rounded text-xs" onClick={() => handleResetFilter()}>Reset Filter</button>
-                  )
-              }
-              {
-                filters.map((filter, index) => {
-                  return (
-                    <span
-                      key={index}
-                      className="ml-1 text-xs bg-transparent rounded mr-1 text-primary px-2 py-1 border border-primary"
-                    >
-                      {filter}
-                    </span>
-                  )
-                })
-              }
-              </div>  
-              <motion.div className="relative grid gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-4">
-              {books.map((book, index) => {
-                  return (
-                    <motion.div key={index} initial={{opacity: 0, y: 40}} 
-                      animate={{opacity: 1, y: 0}} 
-                      exit={{opacity: 0, y: 0}}
-                      positionTransition={true}
-                    >
-                      <BookCard key={index} book={book} handler={handleFilterByTag} />
-                  </motion.div>
-                  )
-              })}
-              </motion.div>
-              </>  
-            )
-        }
-        {
-          isAuthenticated() && books.length === 0 &&
-          <DisplayAddBookForm />
-        }
-        {
-          !isAuthenticated() && 
-          <DisplayLogin />
+          !data ? 
+          (
+            <p className="text-default">Loading...</p>
+          ) : (
+            <Display />
+          )
         }
       </main>
     </div>

@@ -54,7 +54,7 @@ const AddBookForm = ({ ...props }) => {
 
   useEffect(() => {
     if (data && data.allTags) {
-      setTaglist(data.allTags.data.map((tag) => tag.tagName));
+      setTaglist(data.allTags.data.map((tag) => tag.tagName).sort());
     }
   }, [data]);
 
@@ -292,9 +292,9 @@ const AddBookForm = ({ ...props }) => {
                         return (
                           <span
                             key={index}
-                            className="relative border border-primary inline-block rounded-full mr-3 px-2 py-1 mb-2 bg-primary"
+                            className="relative border border-primary inline-block rounded-lg mr-3 px-2 py-1 mb-2 "
                           >
-                            <label className="check-button text-gray-200 pl-3 pr-1 text-sm vertical-top">
+                            <label className="check-button text-default pl-3 pr-1 text-sm vertical-top">
                               {tag}
                               <input
                                 id={tag}

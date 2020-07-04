@@ -56,8 +56,8 @@
   left: 2px;
   height: 16px;
   width: 16px;
-  background-color: var(--primary);
-  border: 1px solid #FFFFFF;
+  background-color: none;
+  border: 1px solid var(--primary);
   margin: 4px 8px;
   border-radius:4px;
 }

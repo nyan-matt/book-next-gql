@@ -58,24 +58,24 @@ const Header = ({ ...props })  => {
       >
         <ul className="list-reset lg:flex justify-end flex-1 items-center shadow-sm lg:shadow-none">
           <li className="mr-3">
-            <Link href="/foo">
-              <a className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline">
+            <Link href="/add">
+              <a className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline" onClick={() => setNavOpen(!navOpen)}>
                 Add a Book
+              </a>
+            </Link>
+          </li>
+          <li className="mr-3">
+            <Link href="/bookshelf">
+              <a
+                className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline" onClick={() => setNavOpen(!navOpen)}>
+                 BookShelf
               </a>
             </Link>
           </li>
           <li className="mr-3">
             <a
               className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline"
-              href="#"
-            >
-              BookShelf
-            </a>
-          </li>
-          <li className="mr-3">
-            <a
-              className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline"
-              href="#"
+              onClick={() => setNavOpen(!navOpen)}
             >
               About
             </a>

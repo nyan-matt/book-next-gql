@@ -1,12 +1,11 @@
-import Head from "next/head";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { createBooks, allTags } from "../utils/api";
+import StarRatingComponent from "react-star-rating-component";
 import { motion } from "framer-motion";
 import { FaPlus, FaMinus, FaTimes } from "react-icons/fa";
-import StarRatingComponent from "react-star-rating-component";
 import { useAuth } from "react-use-auth";
 
-export default function Add(props) {
+const AddBookForm = ({ ...props }) => {
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [authors, setAuthors] = useState([{ name: "" }]);
@@ -135,8 +134,8 @@ export default function Add(props) {
   };
   console.log( isAuthenticated() ? user.email : 'guest');
   return (
-    <div className="container mx-auto">
-      <div className="mx-4">
+    
+      <div className="mx-4 w-full">
         <h1 className="text-default text-2xl mt-12">Add Book</h1>
         {alert.show ? (
           <div className="bg-primary text-reverse-primary rounded mt-2 px-3 py-3">
@@ -333,6 +332,7 @@ export default function Add(props) {
           </form>
         )}
       </div>
-    </div>
-  );
-}
+    
+  )  
+};
+export default AddBookForm;

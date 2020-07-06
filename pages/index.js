@@ -14,13 +14,15 @@ export default function Home(props) {
   const { data, errorMessage } = allBooks();
   const [books, setBooks] = useState([]);
   const [filters, setFilters] = useState([]);
+  
 
   useEffect(() => {
     if (!books.length) {
       setBooks(getBooks(data));
     }
   }, [data, books.length]);
-
+  
+  // TODO abstract filtering
   const handleFilterByTag = (tag) => {
     let tempFilters = [...filters];
     tempFilters.push(tag);
@@ -44,12 +46,13 @@ export default function Home(props) {
           }
         }
       }
-}
+  }
+
   return (
     <div className="container mx-auto flex relative">
       <main className="relative">
         <Hero />
-        <h2 className="text-foreground-default font-thin text-2xl mb-2 mx-4  mt-12 lg:mt-0">Recommended Reads</h2>
+        <h2 className="text-foreground-default font-thin text-2xl mb-2 mx-4  mt-12 lg:mt-0">Latest books from all users</h2>
         <div className="mx-4 h-12">
           {
             filters.length > 0 && 

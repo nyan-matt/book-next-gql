@@ -10,6 +10,7 @@ type Books @colletion(name: "books") {
     tags: [Tag]
     isbn: String
     pageCount: Int
+    user: String
 }
 type Tags @collection(name: "tags") {
     tagName: String!
@@ -43,9 +44,11 @@ input AddBookInput {
     isbn: String
     pageCount: Int
     tags: [AddTagToBook]
+    user: String
 }
 
 type Query {
     allBooks: [Books!]! @index(name: "all_books")
     allTags: [Tags!]! @index(name: "all_tags")
+    booksByUser(user: String!): [Books] @index(name: "books_by_user")
 }

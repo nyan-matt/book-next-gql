@@ -1,41 +1,47 @@
-import React from "react";
-import NextApp from "next/app";
+import React, { useState } from "react";
+import App from "next/app";
 import Head from "next/head";
 import "../styles/index.css";
-// import { ThemeProvider } from "theme-ui";
-//import theme from "../styles/theme";
 import Header from "../components/Header";
 import { AnimatePresence } from "framer-motion";
+import { useRouter } from "next/router";
+import { AuthProvider } from "react-use-auth";
 
-export default class App extends NextApp {
-  constructor(props) {
-    super(props);
-    this.state = { theme: 'dark' };
-  }
+function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  const [theme, setTheme] = useState('dark');
   
-  handleThemeSwitch = (theme) => {
+  const handleThemeSwitch = (theme) => {
     theme === 'dark' ? 
-    this.setState({theme: 'dark'}) 
+    setTheme('dark') 
     : 
-    this.setState({theme: 'light'})
+    setTheme('light')
   } 
 
-  render() {
-    const { Component, pageProps, router } = this.props;
-    return (
-      <div className={`theme-${this.state.theme} bg-background-default wrapper`}>
+  return (
+    <AuthProvider
+      navigate={router.push}
+      auth0_domain="nyan-matt.us.auth0.com"
+      auth0_client_id="nnu7QRkKbG99GGcWqwTHnTICaBhs0NDc"
+    >
+      <div className={`theme-${theme} bg-background-default wrapper`}>
         <Head>
           <title>Book Shelf App</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Header currentTheme={this.state.theme} handler={this.handleThemeSwitch} />
+        <Header currentTheme={theme} handler={handleThemeSwitch} />
         <AnimatePresence exitBeforeEnter key={router.route}>
           <Component {...pageProps} />
         </AnimatePresence>
-        <footer className="h-48 mt-36 border-t border-gray-500 ">
-
+        <footer className="h-48 mt-36 border-t border-gray-500">
         </footer>
       </div>
-    );
+    </AuthProvider>
+  )
+}
+
+export default class _App extends App {
+  render () {
+    return <MyApp {...this.props} />
   }
 }

@@ -34,6 +34,7 @@ export async function getStaticProps({ params }) {
       rating
       coverArt
       comments
+      user
       authors {
         name
       }
@@ -91,7 +92,7 @@ function Book({ data }) {
               alt={`Cover art - ${book.title}`}
             />
           </div>
-          <div className="w-full md:w-1/2 md:ml-4 sm:ml-0 md:mt-0 sm:mt-4 ">
+          <div className="w-full md:w-1/2 md:ml-4 sm:ml-0 md:mt-0 sm:mt-4 break-words">
             <h1 className="text-default font-bold text-4xl">{book.title}</h1>
             <h2 className="text-default font-thin text-2xl -mt-2">
               {book.subTitle}
@@ -128,11 +129,12 @@ function Book({ data }) {
                 </span>
               ))}
             </div>
-            <div className="text-default mt-8 blockquote">{book.comments}</div>
+            <div className="text-default mt-8 blockquote whitespace-pre-wrap">{book.comments}</div>
+            <div className="text-default mt-8 text-sm">Added by: {book.user}</div>
           </div>
         </motion.div>
       ) : (
-        <h1>Ooops, couldn't find that book. </h1>
+        <h1 className="text-default text-3xl">Ooops, couldn't find that book. </h1>
       )}
     </div>
   );

@@ -36,7 +36,7 @@ export default (props) => {
       </motion.div>
       <div
         className="hidden sm:block sm:w-1/2 lg:w-2/5 relative bg-local bg-contain bg-no-repeat bg-center"
-        style={{ backgroundImage: "url(/hero-undraw.png)" }}
+        style={{ backgroundImage: "url(/undraw-book-lover.png)" }}
       ></div>
     </div>
   );

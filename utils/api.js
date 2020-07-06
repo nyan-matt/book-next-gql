@@ -94,6 +94,50 @@ export const bookById = (id) => {
   };
 };
 
+// get all books by user
+export const booksByUser = (user) => {
+  const query = `query booksByUser($user: String!) {
+    booksByUser(user: $user) {
+      data {
+        _id
+        title
+        subTitle
+        rating
+        coverArt
+        user
+        authors {
+            name
+        }
+        tags {
+          name
+        }
+        comments
+      }
+      after
+    }
+  }`;
+  const { data, error } = useFetch(URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${SECRET}`,
+      "Content-type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      variables: { user },
+    }),
+  });
+
+  return {
+    data: getData(data),
+    errorMessage: getErrorMessage(error, data),
+    error,
+  };
+};
+
+
+
 // create a book mutation
 export const createBooks = async (book) => {
   const query = `mutation createBooks($data:BooksInput!) {

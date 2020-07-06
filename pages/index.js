@@ -5,7 +5,6 @@ import { allBooks } from "../utils/api";
 import Hero from "../components/Hero";
 import BookCard from "../components/BookCard";
 import { motion } from "framer-motion";
-import { useAuth } from "react-use-auth";
 
 function getBooks(data) {
   return data ? data.allBooks.data.reverse() : [];
@@ -15,7 +14,7 @@ export default function Home(props) {
   const { data, errorMessage } = allBooks();
   const [books, setBooks] = useState([]);
   const [filters, setFilters] = useState([]);
-  const { isAuthenticated, user, authResult } = useAuth();
+  
 
   useEffect(() => {
     if (!books.length) {
@@ -49,35 +48,11 @@ export default function Home(props) {
       }
   }
 
-  const Login = () => {
-    const { isAuthenticated, isAuthenticating, login, logout } = useAuth();
-    if (isAuthenticated()) {
-      return (
-          <>
-              <button onClick={logout} className="bg-secondary text-sm rounded-full text-default px-3 py-2">Logout</button>
-              <small>{isAuthenticating ? "Authenticating ..." : null}</small>
-              <span className="text-default ml-3">Hi {user.name}</span>
-          </>
-      );
-    } else {
-      return (
-          <>
-              <button onClick={login} className="text-default bg-secondary text-sm rounded-full text-default px-3 py-2">Login</button>
-              <small>{isAuthenticating ? "Authenticating ..." : null}</small>
-              <span className="text-default ml-3">Sup, stranger?</span>
-          </>
-      );
-    }
-  }
-  
-
   return (
     <div className="container mx-auto flex relative">
       <main className="relative">
         <Hero />
-        <Login />
-       
-        <h2 className="text-foreground-default font-thin text-2xl mb-2 mx-4  mt-12 lg:mt-0">Latest books</h2>
+        <h2 className="text-foreground-default font-thin text-2xl mb-2 mx-4  mt-12 lg:mt-0">Latest books from all users</h2>
         <div className="mx-4 h-12">
           {
             filters.length > 0 && 

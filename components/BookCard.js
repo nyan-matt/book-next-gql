@@ -19,7 +19,7 @@ const BookCard = ({ ...props }) => {
           <a className="text-primary font-medium">{book.title}</a>
         </Link>
       </h3>
-      <div>
+      <div className="overflow-hidden">
         {book.authors.map((author, index) => (
           <span key={index} className="text-default">
             {author.name}

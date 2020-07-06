@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaGithub } from "react-icons/fa";
-import { RiContrast2Line, RiGithubLine } from "react-icons/ri"
+import { useAuth } from "react-use-auth"
+import { RiContrast2Line } from "react-icons/ri"
 const Header = ({ ...props })  => {
+  const { isAuthenticated, login, logout } = useAuth();
   const { currentTheme, handler } = props;
   const [navOpen, setNavOpen] = useState(false);
   const [theme, setTheme] = useState(currentTheme);
@@ -10,6 +11,23 @@ const Header = ({ ...props })  => {
   useEffect(() => {
     handler(theme);
   },[theme])
+
+  const Login = () => {
+    const { isAuthenticated, isAuthenticating, login, logout } = useAuth();
+    if (isAuthenticated()) {
+      return (
+          <>
+              <button onClick={logout} className="text-default lg:border lg:border-secondary rounded-full px-4 py-1">Logout</button>
+          </>
+      );
+    } else {
+      return (
+          <>
+              <button onClick={login} className="text-default lg:border lg:border-primary rounded-full px-4 py-1">Login</button>
+          </>
+      );
+    }
+  }
 
   return (
     <nav className="flex justify-between flex-wrap bg-background-default primary py-3 px-4">
@@ -79,6 +97,9 @@ const Header = ({ ...props })  => {
             >
               About
             </a>
+          </li>
+          <li className="mr-3">
+             <Login />
           </li>
           <li className="hidden lg:block text-2xl no-underline pl-2 transition duration-400 hover:text-primary hover:underline">
             <RiContrast2Line className="" onClick={

@@ -132,11 +132,10 @@ const AddBookForm = ({ ...props }) => {
   const closeAlert = () => {
     setAlert({ show: false, message: "" });
   };
-  console.log( isAuthenticated() ? user.email : 'guest');
+  
   return (
     
-      <div className="mx-4 w-full">
-        <h1 className="text-default text-2xl mt-12">Add Book</h1>
+      <div className="px-4 w-full">
         {alert.show ? (
           <div className="bg-primary text-reverse-primary rounded mt-2 px-3 py-3">
             {alert.message}
@@ -168,7 +167,7 @@ const AddBookForm = ({ ...props }) => {
             <div className="flex flex-col w-full">
               <div className="w-full">
                 <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-4 mb-2">
-                  Title
+                  Title *
                 </label>
                 <input
                   className="appearance-none bg-background-default block w-full text-default border rounded py-3 px-4 border-primary focus:shadow-focus focus:outline-none focus:border-primary transition duration-400 "
@@ -194,7 +193,7 @@ const AddBookForm = ({ ...props }) => {
               </div>
               <div className="w-full">
                 <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-4 mb-2">
-                  {authors.length > 1 ? "Authors" : "Author"}
+                  {authors.length > 1 ? "Authors" : "Author *"}
                 </label>
                 {authors.map((author, index) => {
                   return (
@@ -245,11 +244,14 @@ const AddBookForm = ({ ...props }) => {
               </div>
               <div className="w-full">
                 <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-3 mb-2">
-                  Cover Art URL
+                  Cover Art URL <small className="text-xs font-thin normal-case">(square format works best)</small>
                 </label>
                 <input
-                  className="appearance-none bg-background-default block w-full text-default border rounded py-3 px-4 border-primary focus:shadow-focus focus:outline-none focus:border-primary transition duration-400 "
+                  className="appearance-none bg-background-default block w-full text-default border rounded py-3 px-4 border-primary focus:shadow-focus focus:outline-none focus:border-primary transition duration-400 invalid:border-danger"
                   name="coverArt"
+                  type="url"
+                  pattern="https://.*"
+                  title="Must be https:// scheme - 500 px square formats work best"
                   placeholder="https://example/com/path/to/coverart.jpg"
                   value={coverArt}
                   onChange={(e) => setCoverArt(e.target.value)}
@@ -326,7 +328,7 @@ const AddBookForm = ({ ...props }) => {
                 onSubmit={handleSubmit}
                 disabled={!title || !authors[0].name}
               >
-                Submit
+                Add Book
               </button>
             </div>
           </form>

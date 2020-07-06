@@ -26,7 +26,6 @@ export default function Bookshelf(props) {
 
   useEffect(() => {
     setFetched(true);
-    
   }, [books])
 
   // TODO abstract filtering
@@ -45,24 +44,16 @@ export default function Bookshelf(props) {
     setFilters([])
   };
 
-  const DisplayLogin = () => {
-    return (
-      <p className="text-default">
-        Login button
-      </p>
-    )
-  }
-
   const Display = () => {
     if (books.length > 0 ) {
       return (
       <>
         { isAuthenticated() ? 
-          <p className="text-default"> You have {books.length} books on your shelf.</p>
+          null
           :
           <div>
-            <p className="text-default"> 
-              You're not logged in at the moment, but here you can see books added by other guests. You can <a href onClick={login} className="text-primary cursor-pointer ">Login</a>  to create a bookshelf of your own.
+            <p className="text-default mx-4"> 
+              You can <button onClick={login} className="text-primary cursor-pointer ">Login</button>  to create a bookshelf of your own.
             </p>
             
           </div>
@@ -106,24 +97,38 @@ export default function Bookshelf(props) {
     } else {
       return (
         <>
-          <p className="text-default"> You have no books on your shelf. You can add a book by submitting the form below.</p>
+          <p className="text-default mx-4"> You don't have any books on your shelf. 😢 You can add a book by submitting the form below ✨✨✨. </p>
           <AddBookForm />
         </>
       )
     }
   }
-  
+
   return (
-    <div className="container mx-auto flex relative">
-      <main className="relative w-full">
-        <h1 className="text-default text-4xl">
-          Welcome to your bookshelf, 
-          {' '}
-          {
-            typeof window !== 'undefined' && 
-              isAuthenticated() ? user.nickname : "guest"
-          }
+    <div className="container mx-auto relative w-full">
+      
+      <div className="container mx-auto px-6 flex relative">
+      <div
+        className="sm:w-2/3 lg:w-3/5 flex flex-col relative lg:pt-32 sm:pt-0 lg:pb-40 sm:pb-2"
+      >
+        <span className="w-20 h-2 mb-12"></span>
+        <h1 className="text-6xl sm:text-8xl flex flex-col leading-none font-bold text-default">
+          Bookshelf{" "}
+          <span className="text-4xl mt-2 font-light text-foreground-default sm:text-7xl leading-tight">
+            {isAuthenticated() ? 
+              `Hi ${user.nickname}, you have ${books.length} ${books.length === 1 ? 'book' : 'books'} on your shelf` 
+              : 
+              'You\'re not logged in 😢 so you\'re seeing books added by guests'
+            }
+          </span>
         </h1>
+        
+      </div>
+      <div
+        className="mt-8 hidden sm:block sm:w-1/3 lg:w-2/5 relative bg-local bg-contain bg-no-repeat bg-center"
+        style={{ backgroundImage: "url(/undraw-reading.png)" }}
+      ></div>
+      </div>
         {
           !data ? 
           (
@@ -132,7 +137,7 @@ export default function Bookshelf(props) {
             <Display />
           )
         }
-      </main>
+      
     </div>
   );
 }

@@ -7,6 +7,8 @@ import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { AuthProvider } from "react-use-auth";
 
+const CLIENT_ID = process.env.CLIENT_ID;
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [theme, setTheme] = useState('dark');
@@ -22,7 +24,7 @@ function MyApp({ Component, pageProps }) {
     <AuthProvider
       navigate={router.push}
       auth0_domain="nyan-matt.us.auth0.com"
-      auth0_client_id="nnu7QRkKbG99GGcWqwTHnTICaBhs0NDc"
+      auth0_client_id={CLIENT_ID}
     >
       <div className={`theme-${theme} bg-background-default wrapper`}>
         <Head>
@@ -33,7 +35,9 @@ function MyApp({ Component, pageProps }) {
         <AnimatePresence exitBeforeEnter key={router.route}>
           <Component {...pageProps} />
         </AnimatePresence>
-        <footer className="h-48 mt-36 border-t border-gray-500">
+        <footer className="h-24 mt-36 border-t border-primary flex">
+          <div className="sm:w-1/2">1</div>
+          <div className="sm:w-1/2">2</div>
         </footer>
       </div>
     </AuthProvider>

@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import StarRatingComponent from "react-star-rating-component";
-import { motion } from "framer-motion";
 
 const BookCard = ({ ...props }) => {
   const { book, handler } = props;

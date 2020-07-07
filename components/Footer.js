@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { useAuth } from "react-use-auth";
 
 const Footer = () => {

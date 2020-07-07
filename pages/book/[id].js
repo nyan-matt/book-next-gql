@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
 import fetcher from "../../utils/fetcher";
 import { useState, useEffect } from "react";

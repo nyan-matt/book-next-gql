@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuth } from "react-use-auth";
 import { RiContrast2Line } from "react-icons/ri";
+
 const Header = ({ ...props }) => {
   const { isAuthenticated, login, logout } = useAuth();
   const { currentTheme, handler } = props;

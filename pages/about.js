@@ -44,7 +44,7 @@ export default function About(props) {
 
       <h3 className="text-xl font-normal mt-2">Deployment / CD </h3>
       <p>
-        As this was my first time using Next.js, it was also my first time using the Vercel deployment platform. I love using Netlify, so my expectations were high.
+        As this was my first time using Next.js, it was also my first time using the <a href="https://vercel.com/">Vercel</a> deployment platform. I love using Netlify, so my expectations were high.
       </p> 
       <p>
         It was fairly easy to setup, and now whenever I push to master, my app is built in less than a minute. I also liked that branch deploys were active with zero configuration. Nice! My only question is why my site deploys to (what seems like) a million domains. 
@@ -55,27 +55,33 @@ export default function About(props) {
         I didn't start with Fauna as my backend - I actually started with Hasura. I ran into some problems designing and configuring my database (mostly because I'm not really experienced doing so) and I wasn't quite sure how to setup foreign key relationships in Postgres so that I could access them via GraphQL relations. I've heard good things about Hasura, so I chalk this up my lack of determination 😅
       </p>
       <p>
-        I hate to say it, but I think I tried FaunaDB because they had been running a lot of promoted tweets during this time. In any case, Fauna setup "clicked" for me, maybe because you can start with a graphql schema, and once I realized you could create indexes with custom search fields, I felt comfortable setting up what I needed for this app.  
+        I hate to say it, but I think I tried <a href="https://fauna.com/">FaunaDB</a> because they had been running a lot of promoted tweets during this time. In any case, Fauna setup "clicked" for me, maybe because you can start with a graphql schema, and once I realized you could create indexes with custom search fields, I felt comfortable setting up what I needed for this app.  
       </p>
 
       <h2 className="text-3xl font-bold mt-3">Tailwind</h2>
       <p>
-        This was my first time using tailwind css, and I like the utility-first concept. Boostrap and Bulma are nice, but I would often supplement those base styles with sass spacing utilities. It can get a little repetitive, but you can always <a href="https://tailwindcss.com/docs/extracting-components/">extract your own components</a>, or add your own styles.
+        This was my first time using <a href="https://tailwind.com">tailwind</a> css, and I like the utility-first concept. Boostrap and Bulma are nice, but I would often supplement those base styles with sass spacing utilities. It can get a little repetitive, but you can always <a href="https://tailwindcss.com/docs/extracting-components/">extract your own components</a>, or add your own styles.
       </p>
       <p>
         I began this project using theme-ui, a css-in-js jsx framework with its own components package. Initially I wasn't a huge fan of css-in-js as I found it hard to read. After a few days I got used to it, and enjoyed the flexibility. I could not get what I wanted out of the theme-ui components, so eventually I scrapped the whole thing, and converted to tailwind.
       </p>
 
-      <h2 className="text-3xl font-bold mt-3">Authorization</h2>
+      <h2 className="text-3xl font-bold mt-3">Authentication</h2>
       <p>
-        Auth0 and react-use-auth
+        <a href="https://auth0.com">Auth0</a> via <a href="https://github.com/Swizec/useAuth">react-use-auth</a>.
+      </p>
+
+      <h2 className="text-3xl font-bold mt-3">Design</h2>
+      <p>
+        Illustrations from <a href="https://undraw.co">Undraw</a>.
       </p>
 
       <h2 className="text-3xl font-bold mt-3">TODOs</h2>
         <ul className="list-disc list-inside">
           <li>General cleanup, add prettier, etc.</li>
           <li>Edit a book entry</li>
-          <li>Delete a book entry</li> 
+          <li>Delete a book entry</li>
+          <li>Make theme choice persistent across hard page reloads; read from prefers-color-scheme setting</li> 
           <li>View bookshelf of another user (e.g., /bookshelf/:user</li>
           <li>Reading Lists</li>
           <li>"Like" a book</li>

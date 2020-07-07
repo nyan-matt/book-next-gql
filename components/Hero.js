@@ -26,7 +26,7 @@ export default (props) => {
         </p>
         <div className="flex mt-8">
           <a
-            href="#"
+            href="https://github.com/nyan-matt/book-next-gql"
             className="uppercase py-2 px-4  rounded-full bg-primary border-2 border-transparent text-white text-sm text-center hover:bg-primary"
           >
             <RiGithubLine className="inline text-xl mr-1" />

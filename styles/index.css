@@ -36,6 +36,12 @@
   --reverse-primary: #000000;
 }
 
+a.is-active {
+  color: var(--primary);
+} 
+a.is-active:hover {
+  text-decoration: none !important;
+}
 .check-button {
   margin-left: 12px;
 }

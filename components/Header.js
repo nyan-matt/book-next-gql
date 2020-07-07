@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useAuth } from "react-use-auth"
 import { RiContrast2Line } from "react-icons/ri"
 const Header = ({ ...props })  => {
   const { isAuthenticated, login, logout } = useAuth();
   const { currentTheme, handler } = props;
+  const router = useRouter();
   const [navOpen, setNavOpen] = useState(false);
   const [theme, setTheme] = useState(currentTheme);
   
   useEffect(() => {
     handler(theme);
   },[theme])
+
+  const isActive = (href) => {
+    if (href === router.pathname ) {
+      return 'is-active';
+    }
+  }
 
   const Login = () => {
     const { isAuthenticated, isAuthenticating, login, logout } = useAuth();
@@ -77,7 +85,7 @@ const Header = ({ ...props })  => {
         <ul className="list-reset lg:flex justify-end flex-1 items-center shadow-sm lg:shadow-none">
           <li className="mr-3">
             <Link href="/add">
-              <a className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline" onClick={() => setNavOpen(!navOpen)}>
+              <a className={`inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline ${isActive('/add')}`} onClick={() => setNavOpen(!navOpen)}>
                 Add a Book
               </a>
             </Link>
@@ -85,7 +93,7 @@ const Header = ({ ...props })  => {
           <li className="mr-3">
             <Link href="/bookshelf">
               <a
-                className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline" onClick={() => setNavOpen(!navOpen)}>
+                className={`inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline ${isActive('/bookshelf')}`} onClick={() => setNavOpen(!navOpen)}>
                  Bookshelf
               </a>
             </Link>
@@ -93,7 +101,7 @@ const Header = ({ ...props })  => {
           <li className="mr-3">
             <Link href="/about">
               <a
-                className="inline-block py-2 px-4 no-underline mr-2 transition duration-400 hover:text-primary hover:underline"
+                className={`inline-block py-2 px-4 no-underline mr-2 transition duration-400 hover:text-primary hover:underline ${isActive('/about')}`}
                 onClick={() => setNavOpen(!navOpen)}
               >
                 About

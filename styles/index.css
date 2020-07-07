@@ -36,10 +36,6 @@
   --reverse-primary: #000000;
 }
 
-.wrapper {
-  min-height: 100vh;
-}
-
 .check-button {
   margin-left: 12px;
 }
@@ -90,5 +86,17 @@
 .dv-star-rating-star {
   color: var(--primary);
 }
+
+p > a {
+  color: var(--primary);
+  text-decoration: underline;
+  transition: all;
+  transition-duration: 400ms;
+}
+.content > p {
+  line-height: 1.6em;
+  padding: 4px 0px;
+}
+
 
 /* purgecss end ignore */

@@ -28,7 +28,7 @@ export default function Bookshelf(props) {
     setFetched(true);
   }, [books])
 
-  // TODO abstract filtering
+  // TODO DRY abstract filtering
   const handleFilterByTag = (tag) => {
     let tempFilters = [...filters];
     tempFilters.push(tag);
@@ -132,7 +132,7 @@ export default function Bookshelf(props) {
         {
           !data ? 
           (
-            <p className="text-default">Loading...</p>
+            <p className="text-default mx-4">Loading...</p>
           ) : (
             <Display />
           )

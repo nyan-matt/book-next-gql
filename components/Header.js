@@ -86,17 +86,19 @@ const Header = ({ ...props })  => {
             <Link href="/bookshelf">
               <a
                 className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline" onClick={() => setNavOpen(!navOpen)}>
-                 BookShelf
+                 Bookshelf
               </a>
             </Link>
           </li>
           <li className="mr-3">
-            <a
-              className="inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline"
-              onClick={() => setNavOpen(!navOpen)}
-            >
-              About
-            </a>
+            <Link href="/about">
+              <a
+                className="inline-block py-2 px-4 no-underline mr-2 transition duration-400 hover:text-primary hover:underline"
+                onClick={() => setNavOpen(!navOpen)}
+              >
+                About
+              </a>
+            </Link>
           </li>
           <li className="mr-3">
              <Login />

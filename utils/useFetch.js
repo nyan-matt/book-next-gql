@@ -9,13 +9,16 @@ export default function useFetch(url, options) {
 
     const fetchData = async () => {
       try {
-        const res = await fetch(url, { ...options, signal: abortController.signal });
+        const res = await fetch(url, {
+          ...options,
+          signal: abortController.signal,
+        });
         const json = await res.json();
 
         setData(json);
       } catch (error) {
         if (abortController.signal.aborted) {
-          console.log('Component not mounted, fetch aborted...');
+          console.log("Component not mounted, fetch aborted...");
         } else {
           setError(error);
         }

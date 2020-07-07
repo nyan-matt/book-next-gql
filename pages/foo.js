@@ -74,9 +74,9 @@ export default function Add(props) {
       rating: rating,
       comments: comments,
       tags: submitTags,
-      user: isAuthenticated() ? user.email : 'guest',
+      user: isAuthenticated() ? user.email : "guest",
     };
-    
+
     setLoading(true);
     createBooks(book).then((response) => {
       if (response.data && !response.errorMessage) {
@@ -133,7 +133,7 @@ export default function Add(props) {
   const closeAlert = () => {
     setAlert({ show: false, message: "" });
   };
-  console.log( isAuthenticated() ? user.email : 'guest');
+  console.log(isAuthenticated() ? user.email : "guest");
   return (
     <div className="container mx-auto">
       <div className="mx-4">
@@ -322,7 +322,11 @@ export default function Add(props) {
 
               <button
                 className={`uppercase py-2 px-4 rounded-full bg-primary border-2 border-transparent text-sm text-center mt-6 text-white
-              ${!title || !authors[0].name ? "opacity-50 cursor-not-allowed" : ""}
+              ${
+                !title || !authors[0].name
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              }
             `}
                 onSubmit={handleSubmit}
                 disabled={!title || !authors[0].name}

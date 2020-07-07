@@ -12,14 +12,11 @@ const CLIENT_ID = process.env.CLIENT_ID;
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const [theme, setTheme] = useState('dark');
-  
+  const [theme, setTheme] = useState("dark");
+
   const handleThemeSwitch = (theme) => {
-    theme === 'dark' ? 
-    setTheme('dark') 
-    : 
-    setTheme('light')
-  } 
+    theme === "dark" ? setTheme("dark") : setTheme("light");
+  };
 
   return (
     <AuthProvider
@@ -38,14 +35,14 @@ function MyApp({ Component, pageProps }) {
             <Component {...pageProps} />
           </AnimatePresence>
         </div>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
     </AuthProvider>
-  )
+  );
 }
 
 export default class _App extends App {
-  render () {
-    return <MyApp {...this.props} />
+  render() {
+    return <MyApp {...this.props} />;
   }
 }

@@ -1,41 +1,51 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useAuth } from "react-use-auth"
-import { RiContrast2Line } from "react-icons/ri"
-const Header = ({ ...props })  => {
+import { useAuth } from "react-use-auth";
+import { RiContrast2Line } from "react-icons/ri";
+const Header = ({ ...props }) => {
   const { isAuthenticated, login, logout } = useAuth();
   const { currentTheme, handler } = props;
   const router = useRouter();
   const [navOpen, setNavOpen] = useState(false);
   const [theme, setTheme] = useState(currentTheme);
-  
+
   useEffect(() => {
     handler(theme);
-  },[theme])
+  }, [theme]);
 
   const isActive = (href) => {
-    if (href === router.pathname ) {
-      return 'is-active';
+    if (href === router.pathname) {
+      return "is-active";
     }
-  }
+  };
 
   const Login = () => {
     const { isAuthenticated, isAuthenticating, login, logout } = useAuth();
     if (isAuthenticated()) {
       return (
-          <>
-              <button onClick={logout} className="text-default lg:border lg:border-secondary rounded-full px-4 py-1">Logout</button>
-          </>
+        <>
+          <button
+            onClick={logout}
+            className="text-default lg:border lg:border-secondary rounded-full px-4 py-1"
+          >
+            Logout
+          </button>
+        </>
       );
     } else {
       return (
-          <>
-              <button onClick={login} className="text-default lg:border lg:border-primary rounded-full px-4 py-1">Login</button>
-          </>
+        <>
+          <button
+            onClick={login}
+            className="text-default lg:border lg:border-primary rounded-full px-4 py-1"
+          >
+            Login
+          </button>
+        </>
       );
     }
-  }
+  };
 
   return (
     <nav className="flex justify-between flex-wrap bg-background-default primary py-3 px-4">
@@ -57,11 +67,11 @@ const Header = ({ ...props })  => {
 
       <div className="flex lg:hidden">
         <div className="flex items-center mr-4">
-              <RiContrast2Line className="text-default text-2xl inline-block" onClick={
-                () => setTheme(theme === 'dark' ? 'light' : 'dark')
-                } 
-              />
-            </div>
+          <RiContrast2Line
+            className="text-default text-2xl inline-block"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          />
+        </div>
         <button
           className="flex items-center px-3 py-2 border rounded text-default  focus:outline-none"
           onClick={() => setNavOpen(!navOpen)}
@@ -85,7 +95,12 @@ const Header = ({ ...props })  => {
         <ul className="list-reset lg:flex justify-end flex-1 items-center shadow-sm lg:shadow-none">
           <li className="mr-3">
             <Link href="/add">
-              <a className={`inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline ${isActive('/add')}`} onClick={() => setNavOpen(!navOpen)}>
+              <a
+                className={`inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline ${isActive(
+                  "/add"
+                )}`}
+                onClick={() => setNavOpen(!navOpen)}
+              >
                 Add a Book
               </a>
             </Link>
@@ -93,15 +108,21 @@ const Header = ({ ...props })  => {
           <li className="mr-3">
             <Link href="/bookshelf">
               <a
-                className={`inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline ${isActive('/bookshelf')}`} onClick={() => setNavOpen(!navOpen)}>
-                 Bookshelf
+                className={`inline-block py-2 px-4 no-underline transition duration-400 hover:text-primary hover:underline ${isActive(
+                  "/bookshelf"
+                )}`}
+                onClick={() => setNavOpen(!navOpen)}
+              >
+                Bookshelf
               </a>
             </Link>
           </li>
           <li className="mr-3">
             <Link href="/about">
               <a
-                className={`inline-block py-2 px-4 no-underline mr-2 transition duration-400 hover:text-primary hover:underline ${isActive('/about')}`}
+                className={`inline-block py-2 px-4 no-underline mr-2 transition duration-400 hover:text-primary hover:underline ${isActive(
+                  "/about"
+                )}`}
                 onClick={() => setNavOpen(!navOpen)}
               >
                 About
@@ -109,12 +130,13 @@ const Header = ({ ...props })  => {
             </Link>
           </li>
           <li className="mr-3">
-             <Login />
+            <Login />
           </li>
           <li className="hidden lg:block text-2xl no-underline pl-2 transition duration-400 hover:text-primary hover:underline">
-            <RiContrast2Line className="" onClick={
-              () => setTheme(theme === 'dark' ? 'light' : 'dark')
-            } />
+            <RiContrast2Line
+              className=""
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            />
           </li>
         </ul>
       </div>
@@ -122,4 +144,4 @@ const Header = ({ ...props })  => {
   );
 };
 
-export default Header
+export default Header;

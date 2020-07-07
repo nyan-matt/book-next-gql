@@ -136,8 +136,6 @@ export const booksByUser = (user) => {
   };
 };
 
-
-
 // create a book mutation
 export const createBooks = async (book) => {
   const query = `mutation createBooks($data:BooksInput!) {

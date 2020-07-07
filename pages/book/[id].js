@@ -129,12 +129,18 @@ function Book({ data }) {
                 </span>
               ))}
             </div>
-            <div className="text-default mt-8 blockquote whitespace-pre-wrap">{book.comments}</div>
-            <div className="text-default mt-8 text-sm">Added by: {book.user}</div>
+            <div className="text-default mt-8 blockquote whitespace-pre-wrap">
+              {book.comments}
+            </div>
+            <div className="text-default mt-8 text-sm">
+              Added by: {book.user}
+            </div>
           </div>
         </motion.div>
       ) : (
-        <h1 className="text-default text-3xl">Ooops, couldn't find that book. </h1>
+        <h1 className="text-default text-3xl">
+          Ooops, couldn't find that book.{" "}
+        </h1>
       )}
     </div>
   );

@@ -7,12 +7,14 @@ const BookCard = ({ ...props }) => {
   const { book, handler } = props;
   return (
     <div className="rounded">
-    <div className="relative pb-full">
-      <Link href="/book/[id]" as={`/book/${book._id}`}>
-        <img className="absolute w-full h-full object-cover rounded border border-gray-500 cursor-pointer" src={book.coverArt ? book.coverArt : "/no-image.png"}
-          alt={`Cover art - ${book.title}`}
-        />
-      </Link>
+      <div className="relative pb-full">
+        <Link href="/book/[id]" as={`/book/${book._id}`}>
+          <img
+            className="absolute w-full h-full object-cover rounded border border-gray-500 cursor-pointer"
+            src={book.coverArt ? book.coverArt : "/no-image.png"}
+            alt={`Cover art - ${book.title}`}
+          />
+        </Link>
       </div>
       <h3 className="mt-2">
         <Link href="/book/[id]" as={`/book/${book._id}`}>
@@ -50,7 +52,6 @@ const BookCard = ({ ...props }) => {
         ))}
       </div>
     </div>
-    
   );
 };
 export default BookCard;

@@ -27,8 +27,25 @@ function MyApp({ Component, pageProps }) {
       <div className={`theme-${theme} bg-background-default`}>
         <div className="flex-grow min-h-screen pb-12">
           <Head>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-6085930-4"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'UA-6085930-4', {
+                page_path: window.location.pathname,
+              });
+              `,
+            }}
+            />
             <title>Book Shelf App</title>
             <link rel="icon" href="/favicon.ico" />
+            
           </Head>
           <Header currentTheme={theme} handler={handleThemeSwitch} />
           <AnimatePresence exitBeforeEnter key={router.route}>

@@ -39,11 +39,11 @@ const BookCard = ({ ...props }) => {
           editing={false}
         />
       )}
-      <div>
+      <div className="flex flex-wrap">
         {book.tags.map((tag, index) => (
           <span
             key={index}
-            className="text-xs bg-transparent rounded mr-1 text-primary px-2 py-1 cursor-pointer border border-primary hover:bg-primary hover:text-reverse-primary transition duration-200"
+            className="text-xs bg-transparent rounded mr-1 mb-1 text-primary px-2 py-1 cursor-pointer border border-primary hover:bg-primary hover:text-reverse-primary transition duration-200"
             onClick={() => handler(tag.name)}
           >
             {tag.name}

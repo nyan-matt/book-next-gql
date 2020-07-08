@@ -50,7 +50,7 @@ export default function Home(props) {
     <div className="container mx-auto flex relative">
       <main className="relative">
         <Hero />
-        <h2 className="text-foreground-default font-thin text-2xl mb-2 mx-4  mt-12 lg:mt-0">
+        <h2 className="text-foreground-default font-thin text-2xl mb-2 mx-6  mt-12 lg:mt-0">
           Latest books from all users
         </h2>
         <div className="mx-4 h-12">
@@ -95,7 +95,7 @@ export default function Home(props) {
         ) : (
           <motion.div
             variants={stagger(0.3)}
-            className="relative grid gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-4"
+            className="relative grid gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-6"
           >
             {books.map((book, index) => {
               return (

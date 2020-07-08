@@ -49,7 +49,7 @@ export default function Bookshelf(props) {
         <>
           {isAuthenticated() ? null : (
             <div>
-              <p className="text-default mx-4">
+              <p className="text-default mx-6 mb-2">
                 You can{" "}
                 <button
                   onClick={login}
@@ -62,7 +62,7 @@ export default function Bookshelf(props) {
             </div>
           )}
 
-          <div className="mx-4 h-12">
+          <div className="mx-6 h-12">
             {filters.length > 0 && (
               <button
                 className="bg-primary text-reverse-primary rounded-full py-2 px-4 rounded text-xs"
@@ -82,7 +82,7 @@ export default function Bookshelf(props) {
               );
             })}
           </div>
-          <motion.div className="relative grid gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-4">
+          <motion.div className="relative grid gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-6">
             {books.map((book, index) => {
               return (
                 <motion.div
@@ -138,7 +138,7 @@ export default function Bookshelf(props) {
           style={{ backgroundImage: "url(/undraw-reading.png)" }}
         ></div>
       </div>
-      {!data ? <p className="text-default mx-4">Loading...</p> : <Display />}
+      {!data ? <p className="text-default mx-6">Loading...</p> : <Display />}
     </div>
   );
 }

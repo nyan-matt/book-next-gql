@@ -134,7 +134,7 @@ const AddBookForm = ({ ...props }) => {
   };
 
   return (
-    <div className="px-4 w-full">
+    <div className="px-6 w-full">
       {alert.show ? (
         <div className="bg-primary text-reverse-primary rounded mt-2 px-3 py-3">
           {alert.message}

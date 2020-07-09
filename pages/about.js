@@ -100,7 +100,7 @@ export default function About(props) {
         <h2 className="text-3xl font-bold mt-3">Tailwind</h2>
         <p>
           This was my first time using{" "}
-          <a href="https://tailwind.com">tailwind</a> css, and I like the
+          <a href="https://tailwindcss.com">tailwind</a> css, and I like the
           utility-first concept. Boostrap and Bulma are nice, but I would often
           supplement those base styles with sass spacing utilities. It can get a
           little repetitive, but you can always{" "}
@@ -131,19 +131,22 @@ export default function About(props) {
 
         <h2 className="text-3xl font-bold mt-3">TODOs</h2>
         <ul className="list-disc list-inside">
-          <li>General cleanup, add prettier, etc.</li>
+          <li>General cleanup, abstract filtering, etc.</li>
           <li>Edit a book entry</li>
           <li>Delete a book entry</li>
+          <li>View bookshelf of another user (e.g., /bookshelf/:user</li>
           <li>
             Make theme choice persistent across hard page reloads; read from
             prefers-color-scheme setting
           </li>
-          <li>View bookshelf of another user (e.g., /bookshelf/:user</li>
-          <li>Reading Lists</li>
+          <li>Reading lists</li>
           <li>"Like" a book</li>
           <li>Tests</li>
-          <li>Add new tag</li>
+          <li>Resolve accessibility concerns</li>
+          <li>Create new tag(s) on the fly</li>
           <li>Search by title, author</li>
+          <li>PWA</li>
+          <li>Update meta tags title/description on route change </li>
         </ul>
       </div>
     </div>

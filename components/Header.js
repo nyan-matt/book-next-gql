@@ -130,7 +130,7 @@ const Header = ({ ...props }) => {
               </a>
             </Link>
           </li>
-          <li className="mr-3">
+          <li className="mr-3 mt-1 lg:mt-0">
             <Login />
           </li>
           <li className="hidden lg:block text-2xl no-underline pl-2 transition duration-400 hover:text-primary hover:underline">

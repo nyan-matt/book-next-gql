@@ -21,7 +21,7 @@ export default (props) => {
         </h1>
         <p className="text-sm pt-3 sm:text-base text-gray-500 pr-3">
           A small proof-of-concept application using Next.js &amp; React hooks
-          to query a FaunaDB GraphQL endpoint to manage a bookshelf with reading
+          to query a FaunaDB GraphQL endpoint to manage a bookshelf with book
           recommendations.
         </p>
         <div className="flex mt-8">

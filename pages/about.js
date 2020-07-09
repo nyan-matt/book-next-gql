@@ -123,6 +123,18 @@ export default function About(props) {
           <a href="https://auth0.com">Auth0</a> via{" "}
           <a href="https://github.com/Swizec/useAuth">react-use-auth</a>.
         </p>
+        <p>
+          🚨  {' '}   
+          <strong>Bug alert</strong>: If you are using Chrome, and are
+          blocking 3rd party cookies, a hard refresh will log you out of the
+          session 😱
+        </p>
+        <p>
+          There is an{" "}
+          <a href="https://github.com/Swizec/useAuth/issues/65">open issue</a>{" "}
+          with the useAuth package - if I can't figure out a workaround, I might
+          look at another authentication mechanism. If anyone has experience with auth0 and/or useAuth, please let me know!
+        </p>
 
         <h2 className="text-3xl font-bold mt-3">Design</h2>
         <p>

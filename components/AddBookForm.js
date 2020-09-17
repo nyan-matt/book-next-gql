@@ -16,8 +16,11 @@ const AddBookForm = ({ ...props }) => {
   const [rating, setRating] = useState();
   const [tags, setTags] = useState([]);
   const [taglist, setTaglist] = useState([]);
+  const [imageLink, setImageLink] = useState("");
+  const [showImageLink, setShowImageLink] = useState(false);
   const { data, error } = allTags();
   const { isAuthenticated, user } = useAuth();
+  
   const GBAPI =
     "https://www.googleapis.com/books/v1/volumes?printType=books&maxResults=5&printType=books&";
 
@@ -57,6 +60,10 @@ const AddBookForm = ({ ...props }) => {
       setTaglist(data.allTags.data.map((tag) => tag.tagName).sort());
     }
   }, [data]);
+
+  useEffect(() => {
+    setImageLink(`https://www.google.com/search?q=site%3Aamazon.com+${title}&tbm=isch&oq=site%3Aamazon.com+${title}&sclient=img&hl=en`)
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -132,6 +139,10 @@ const AddBookForm = ({ ...props }) => {
   const closeAlert = () => {
     setAlert({ show: false, message: "" });
   };
+
+  const generateImgLink = () => {
+    
+  }
 
   return (
     <div className="px-6 w-full">
@@ -245,7 +256,12 @@ const AddBookForm = ({ ...props }) => {
               <label className="tracking-wide font-bold block text-sm uppercase text-gray-500 mt-3 mb-2">
                 Cover Art URL{" "}
                 <small className="text-xs font-thin normal-case">
-                  (square format works best)
+                  (square format works best) 
+                </small>
+                <small className="text-xs font-thin normal-case float-right">
+                  {showImageLink  && 
+                    <a target="_blank" href={imageLink}>See Suggestions</a>
+                  }
                 </small>
               </label>
               <input
@@ -257,6 +273,7 @@ const AddBookForm = ({ ...props }) => {
                 placeholder="https://example/com/path/to/coverart.jpg"
                 value={coverArt}
                 onChange={(e) => setCoverArt(e.target.value)}
+                onFocus={(e) => setShowImageLink(true)}
               />
             </div>
             <div className="w-full">

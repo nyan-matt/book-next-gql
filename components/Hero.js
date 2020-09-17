@@ -14,7 +14,7 @@ export default (props) => {
       >
         <span className="w-20 h-2 mb-12"></span>
         <h1 className="text-6xl sm:text-8xl flex flex-col leading-none font-bold text-default">
-          Next Books{" "}
+          Next Bookshelf{" "}
           <span className="text-4xl mt-2 font-light text-foreground-default sm:text-7xl">
             Next.js, FaunaDB, GraphQL &amp; Tailwind
           </span>

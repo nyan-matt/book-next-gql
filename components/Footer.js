@@ -14,7 +14,7 @@ const Footer = () => {
           &copy; {currentYear()}{" "}
           <a
             className="text-primary hover:underline transition duration-400"
-            href="https://matthewrea.com"
+            href="https://github.com/nyan-matt"
           >
             Matt Rea
           </a>

@@ -16,7 +16,7 @@ export default (props) => {
         <h1 className="text-6xl sm:text-8xl flex flex-col leading-none font-bold text-default">
           Next Bookshelf{" "}
           <span className="text-4xl mt-2 font-light text-foreground-default sm:text-7xl">
-            Next.js, FaunaDB, GraphQL &amp; Tailwind
+            Add, rate, and share your favorite reads
           </span>
         </h1>
         <p className="text-sm pt-3 sm:text-base text-gray-500 pr-3">

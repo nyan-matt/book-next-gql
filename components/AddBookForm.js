@@ -62,8 +62,13 @@ const AddBookForm = ({ ...props }) => {
   }, [data]);
 
   useEffect(() => {
-    setImageLink(`https://www.google.com/search?q=site%3Aamazon.com+${title}&tbm=isch&oq=site%3Aamazon.com+${title}&sclient=img&hl=en`)
-  })
+    setImageLink(`https://www.google.com/search?q=site%3Aamazon.com+${title}&tbm=isch&oq=site%3Aamazon.com+${title}&sclient=img&hl=en`);
+    if (title == "") {      
+      setShowImageLink(false);
+    } else {
+      setShowImageLink(true);
+    }
+  }, [title]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -139,11 +144,6 @@ const AddBookForm = ({ ...props }) => {
   const closeAlert = () => {
     setAlert({ show: false, message: "" });
   };
-
-  const generateImgLink = () => {
-    
-  }
-
   return (
     <div className="px-6 w-full">
       {alert.show ? (
@@ -186,7 +186,7 @@ const AddBookForm = ({ ...props }) => {
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                onBlur={() => handleLookAhead()}
+                onBlur={(e) => handleLookAhead()}
               />
             </div>
             <div className="w-full">
@@ -259,7 +259,7 @@ const AddBookForm = ({ ...props }) => {
                   (square format works best) 
                 </small>
                 <small className="text-xs font-thin normal-case float-right">
-                  {showImageLink  && 
+                  { showImageLink &&
                     <a target="_blank" href={imageLink}>See Suggestions</a>
                   }
                 </small>
@@ -273,7 +273,6 @@ const AddBookForm = ({ ...props }) => {
                 placeholder="https://example/com/path/to/coverart.jpg"
                 value={coverArt}
                 onChange={(e) => setCoverArt(e.target.value)}
-                onFocus={(e) => setShowImageLink(true)}
               />
             </div>
             <div className="w-full">
